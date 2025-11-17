@@ -1,0 +1,32 @@
+<%= form_for @changeset, @form_url, [method: :post, class: "flex flex-col gap-4 h-full", enctype: "multipart/form-data", multipart: true, style: "width: 100%;", name: "client"], fn f -> %>
+  <div style="display: flex; flex-direction: row;">
+    <div class="right slot-widget-div" style="width: 100%">
+      <div>
+        <h5><%= @title %></h5>
+        <%= render "_client_form.html", Map.merge(assigns, %{f: f, changeset: @changeset}) %>
+        <%= submit raw(gettext("Save")), class: "primary submit-btn" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyChOui4dw3ctxsdzIurZgeHf8SfanLA7Ec"></script>
+<script>
+    var autocomplete = new google.maps.places.Autocomplete($("#address")[0], {});
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        var address_components = place.address_components;
+        for(var i=0;i<address_components.length;i++){
+          if(address_components[i].types.indexOf("locality") != -1){
+            $("#city").val(address_components[i].long_name )
+          }
+          if(address_components[i].types.indexOf("administrative_area_level_1") != -1){
+            $("#state").val(address_components[i].long_name )
+          }
+          if(address_components[i].types.indexOf("postal_code") != -1){
+            $("#zip").val(address_components[i].long_name )
+          }
+        }
+        
+    });
+</script>

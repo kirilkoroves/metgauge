@@ -1,0 +1,9 @@
+import * as React from "react";
+
+const SvgAlignCenter = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M9 18H15V16H9V18ZM6 11V13H18V11H6ZM3 6V8H21V6H3Z" fill="black"/>
+  </svg>
+);
+
+export default SvgAlignCenter;

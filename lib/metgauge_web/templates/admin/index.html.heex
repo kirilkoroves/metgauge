@@ -1,0 +1,127 @@
+<h2 class="grow shrink-0" >
+  <%= gettext("Welcome back,") %> <%= assigns.profile.first_name %> !
+</h2>
+
+<div class="admin-home-wrapper">
+  <div class="main">
+    <div class="admin-section report-wrapper">
+      <div class="heading" style="display: flex; flex-direction: column; align-items: start;">
+        <h5><%= gettext "Report" %></h5>
+        <span class="month_report_dates">
+          <div style="display: flex;gap: 1rem;flex-direction: row">
+            <input type="text" id="filter_from" name="from" class="date_field" value={@from} placeholder={gettext "From Date"} style="width: 150px;"/>
+            <input type="text" id="filter_to" name="to" class="date_field" value={@to} placeholder={gettext "To Date"}  style="width: 150px;"/>
+            <input type="submit" value={gettext "Filter"} class="btn btn-small small primary filter-submit" />
+          </div>
+        </span>
+      </div>
+      <div class="items">
+        <%= render "_report_widget.html", assigns %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  $(document).ready(function(){
+    $(".date_field").datepicker();
+    $(".filter-submit").click(function(e){
+      e.stopPropagation();
+      e.preventDefault();
+      if($("#filter_from").val() == "" || $("#filter_to").val() == ""){
+        alert("Please enter filter dates");
+      }
+      else{
+        $.ajax({
+          url: "/admin/report_widget",
+          method: "GET",
+          data: {"from": $("#filter_from").val(), "to": $("#filter_to").val()},
+          success: function(response){
+            $(".items").html(response);
+          }
+        })
+      }
+      
+    });
+  })
+  
+  $(document).ready(function(){
+    $(".accordion .trigger").click(function(){
+          if($(this).hasClass('selected')){
+            $(this).removeClass("nested-acc-border");
+            $(this).removeClass('selected');
+            $(this).children('.icon').removeClass('active');
+            $(this).next().slideUp("fast", "linear");
+            $(this).parent().removeClass('active');
+          }else{
+             $(this).parent().children(".accordion .trigger").removeClass('nested-acc-border');
+              $(this).addClass("nested-acc-border");
+              $(this).parent().children(".accordion .trigger").removeClass('selected');
+              $(this).addClass('selected');
+              $(this).parent().children(".accordion .trigger").children('.icon').removeClass('active');
+              $(this).children('.icon').addClass('active');
+              $(this).parent().children(".accordion .trigger").next().slideUp("fast", "linear");
+              $(this).next().slideDown("fast", "linear");
+              $(this).parent().children(".accordion .item").removeClass('active');
+              $(this).parent().addClass('active');
+          }
+      });
+    messaging = firebase.messaging();
+    if (Notification.permission != "denied" && Notification.permission != "granted"){
+      messaging.requestPermission().then(function() {
+        console.log('Notification permission granted.');
+        Notification.maxActions = 1;
+        window.register(messaging);
+      }).catch(function(err) {
+        console.log('Unable to get permission to notify.', err);
+      });
+      if (Notification.permission != "denied" && Notification.permission != "granted"){
+        alert("Please allow permissions for notification by clicking on the icon before the website address on the menu bar in browser.")
+      }
+    }
+  });
+</script>
+
+<style>
+    table, th, tr, td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+        text-align: left;
+    }
+
+    tr:nth-child(odd){background-color: #f2f2f2;}
+
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #004e7d;
+      color: white;
+    }
+
+    .datepicker-dropdown{
+      position: absolute;
+      padding-top: 70px;
+    }
+
+    .table-condensed{
+      background: white;
+    }
+    .active.day{
+      background: darkgray;
+      color: white;
+    }
+    @media screen and (max-width: 768px){
+      .filter-item{
+          flex-direction: column;
+          height: 105px;
+      }
+    }
+
+    .day{
+      cursor: pointer;
+    }
+</style>

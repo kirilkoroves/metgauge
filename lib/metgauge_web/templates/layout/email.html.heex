@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="main-class">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+      .email{
+          background: #F0F1F1;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .email-wrapper{
+          padding: 0;
+          margin: 16px;
+          background: #fff;
+      }
+
+      @media (min-width: 768px){
+        .email-wrapper{
+          margin-left: 20%;
+          margin-right: 20%;
+        }
+      }
+
+      .email-wrapper header{
+          padding: 24px 32px;
+      }
+
+      .email-wrapper header > img{
+          max-width: 170px;
+          height: auto;
+      }
+
+      .email-wrapper footer{
+          width: 100%;
+          text-align: left;
+          padding: 16px 32px;
+          color: #101828;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 22px;
+          letter-spacing: 0px;
+      }
+
+      .email-main-body{
+          padding: 32px;
+          text-align: left;
+      }
+      .email-main-body p{
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 22px;
+          letter-spacing: 0px;
+          text-align: left;
+          color: #1D2939;
+      }
+
+      .email-main-body .title h2, .email-main-body .title{
+          margin: 0;
+          padding: 0;
+          font-size: 32px;
+          font-weight: 700;
+          line-height: 40px;
+          letter-spacing: 0em;
+          color: #101828;
+      }
+      .email-main-body .title{
+          padding-bottom: 12px;
+      }
+      .email-main-body a{
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 22px;
+          letter-spacing: 0px;
+          text-align: left;
+          color: #101828;
+      }
+
+      .email-main-body b{
+          color: #101828;
+      }
+
+      .email-main-body .hero-wrapper{
+          padding-left: 0!important;
+          padding-right: 0!important;
+          padding-top: 0!important;
+          padding-bottom: 0!important;
+          height: 100%!important;
+      }
+
+      .email-main-body .booking-flow-main.confirmation{
+          padding: 0!important;
+          height: 100%!important;
+          box-shadow: none!important;
+      }
+
+      .email-main-body .booking-flow-main.confirmation .main-content li{
+          padding: 0!important;
+      }
+
+      .email-main-body .booking-flow-main{
+          border-radius: 0!important;
+      }
+
+      .email-main-body .booking-flow-main h2{
+          font-size: 24px!important;
+          line-height: 32px!important;
+      }
+
+      .email-main-body .mailtolink{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 22px;
+        letter-spacing: 0px;
+        text-align: left;
+        text-decoration: underline;
+      }
+      .email-main-body ul, .email-main-body ol{
+          padding: 16px 0;
+      }
+      a{
+        text-decoration: inherit;
+      }
+
+      button, .btn {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+        font-family: Gantari;
+        justify-content: center;
+        background-color: rgb(242, 244, 247);
+        text-align: center;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        padding: 10px 16px;
+        border-radius: 8px;
+      }
+      button.dark, .btn.dark, button.primary, .btn.primary {
+        background-color: #004e7d;
+        color: rgb(255, 255, 255);
+        padding: 18px;
+      }
+      body{
+        font-family: 'Gantari', sans-serif;
+      }
+      a.content{
+          font-weight: normal !important;
+      }
+
+      .event_slot_dates{
+          font-size: small !important;
+          padding: 5px 8px !important;
+      }
+      .event_type_div{
+          display: flex;
+      }
+      .border_bottom{
+          border: 0px;
+          border-bottom-width: 1px;
+          border-style: solid;
+          border-color: #d0d5dd;
+          padding-bottom: 5px;
+      }
+
+      .main_sellers div{
+          margin-right: 20px;
+      }
+
+      .seller_div{
+        margin-bottom: 20px;
+      }
+
+      .time-seller-item {
+            display: flex;
+            align-items: top;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+
+        .time-seller-item .img {
+            height: 50px;
+            min-width: 50px;
+            min-height: 50px;
+            max-height: 50px;
+            overflow: hidden;
+            background-color: rgb(208, 213, 221);
+            border-radius: 12px;
+            margin-right: 10px;
+        }
+
+        .time-seller-item h4{
+            margin: 0;
+        }
+
+        .time-seller-item .img img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+    .event_type_div.card {
+        left: 0px;
+        top: 0px;
+        display: block;
+        margin-top: 4px;
+        margin-bottom: 8px;
+        border-width: 8px;
+        background-color: rgb(255, 255, 255);
+        padding: 12px;
+        border-radius: 12px;
+        border: 2px solid rgb(228, 231, 236);
+
+    }
+
+    .event_type_div.card .img {
+      background-color: #F7F7F7;
+      border-radius: 8px;
+    }
+
+    .event_type_div.card .img {
+        width: 100%;
+        overflow: hidden;
+        height: 156px;
+        text-align: center;
+    }
+
+    .event_type_div.card .img a img {
+        height: 100%;
+        width: auto;
+        border-radius: 8px;
+        margin: 0 auto;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    .event_type_div.card h3, .event_type_div.card h3 a {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        text-align: left;
+        font-size: 16px;
+        line-height: 10px;
+        color: rgb(16, 24, 40);
+    }
+
+    .event_type_div.card .top {
+        display: block;
+        padding-top: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px;
+        color: rgb(102, 112, 133);
+    }
+
+    .dot{
+        margin: 2px;
+        background-color: rgb(208, 213, 221);
+        height: 4px;
+        width: 4px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+    .event-slots a{
+         font-family: 'Inter', sans-serif;
+    }
+    .event-slots{
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .main_sellers div{
+        margin-right: 0
+    }
+
+     @media (max-width: 768px){
+        .event-slots {
+            display: block;
+        }
+
+        .email-main-body .event-slots a{
+            width: calc(100% - 12px);
+            margin-top: 5px;
+            font-size: large !important;
+            text-align: center !important;
+            display: inline-block !important;
+        }
+      }
+    .original:before{
+        content: "("
+    }
+
+    .original:after{
+        content: ")"
+    }
+
+    .original{
+        font-style: italic;
+    }
+    
+    .chatbot-response .message{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="email">
+      <div class="email-wrapper" style="background: white;">
+          <header style="background: white;">
+              <img class="logo" src={Routes.static_url(@conn, "/assets/images/logo.png")}/>
+          </header>
+          <div class="email-main-body">
+              <%= @inner_content %>
+          </div>
+          <footer>
+              <%= gettext("All rights reserved. &copy; %{year} Commercial Works", year: Timex.now().year) |> raw() %>
+          </footer>
+      </div>
+    </div>
+  </body>
+</html>

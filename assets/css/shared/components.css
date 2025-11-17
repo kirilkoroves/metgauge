@@ -1,0 +1,998 @@
+.popup-form {
+    /*@apply mx-4 my-[1rem] md:my-[2.5rem] md:mx-auto md:w-full md:max-w-[37rem];*/
+    @apply mx-4 md:mx-auto md:w-full md:max-w-[37rem] mb-auto;
+    @apply p-6 md:p-10;
+    @apply flex flex-col gap-6;
+    @apply bg-white rounded-xl shadow-xl border-gray-200;
+}
+
+.popup-form.spaced {
+    @apply gap-6;
+}
+
+.popup-form .headings {
+    @apply flex flex-col gap-2;
+}
+
+.popup-form .headings h4 {
+    @apply text-heading-6 md:text-heading-4 font-normal;
+}
+
+.popup-form h2 {
+    @apply text-gray-900;
+    line-height: 140%
+}
+
+.popup-form h3 {
+    @apply text-gray-600;
+}
+
+.popup-form h4 {
+    @apply text-gray-900 leading-[160%];
+}
+
+.popup-form h5 {
+    @apply text-black;
+}
+
+.popup-form h6 {
+    @apply text-gray-600;
+    line-height: 140%;
+}
+
+.popup-form h3 svg {
+    @apply h-5;
+}
+
+.popup-form .back {
+    @apply flex flex-row gap-[1rem] items-center;
+    @apply text-base font-semibold text-black;
+    line-height: 140%;
+}
+.popup-form .back svg{
+    width: 20px!important;
+    height: 20px!important;
+}
+
+.popup-form .footnote {
+    @apply pt-0 text-center text-gray-500 text-sm;
+}
+
+/* -------------------------------------------- */
+
+.button-tabs {
+    @apply flex flex-row justify-between gap-2 px-2 max-h-[3.5rem];
+    @apply bg-gray-100 rounded-lg;
+}
+
+.button-tabs button {
+    @apply basis-1/2 my-2 text-gray-500;
+}
+
+.button-tabs button.active {
+    @apply bg-white text-gray-900;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* -------------------------------------------- */
+
+button, .btn {
+    @apply inline-flex flex-row justify-center items-center gap-3 font-gantari;
+    @apply bg-gray-100 enabled:hover:bg-gray-200;
+    @apply text-center font-semibold;
+    @apply cursor-pointer;
+    white-space: nowrap;
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+
+button:disabled, .btn:disabled {
+    @apply opacity-40 cursor-default;
+}
+
+button.none, .btn.none {
+    @apply p-0;
+}
+
+button.dark, .btn.dark, /* Deprecated */
+button.primary, .btn.primary {
+    @apply text-white bg-primary-700;
+    @apply enabled:hover:bg-primary-600;
+}
+
+button.secondary, .btn.secondary {
+    @apply bg-gray-100 text-gray-700;
+    @apply enabled:hover:bg-gray-200;
+}
+
+button.tertiary, .btn.tertiary {
+    @apply text-gray-700 bg-white;
+    @apply border border-gray-300 rounded-lg;
+    @apply enabled:hover:bg-gray-100;
+}
+
+button.ghost, .btn.ghost {
+    @apply text-gray-700 bg-white;
+    @apply border-0 rounded-lg;
+    @apply enabled:hover:bg-gray-50;
+}
+
+
+button.dark svg path, .btn.dark svg path {
+    @apply stroke-white;
+}
+
+button.light, .btn.light {
+    @apply text-gray-700 bg-white;
+    @apply border border-gray-200 rounded-lg;
+}
+
+
+button.empty, .btn.empty {
+    @apply text-gray-700 border-0 bg-transparent;
+}
+
+button.small, .btn.small {
+    @apply px-3 py-1.5 text-sm;
+}
+
+button.square.small, .btn.square.small {
+    @apply px-1.5;
+}
+
+button.large, .btn.large {
+    @apply px-6 py-4;
+}
+
+button.medium, .btn.medium {
+    padding: 15px 24px;
+    font-size: 16px;
+    line-height: 18px;
+}
+
+
+/* -------------------------------------------- */
+
+.header-menu {
+    @apply bg-white py-4;
+    width: 320px;
+    box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+}
+
+.header-menu > * {
+    @apply px-6;
+}
+
+.main-hero-menu{
+    left: auto!important;
+    margin-left: 0;
+    margin-right: 10px;
+    z-index: 999999999999;
+}
+
+/* -------------------------------------------- */
+
+.icon-menu {
+    @apply flex flex-col items-start gap-1 px-0;
+    @apply font-semibold text-base leading-6;
+}
+
+.icon-menu svg {
+  @apply w-10 h-10;
+}
+
+.icon-menu > *, .icon-menu .nested > * {
+    @apply py-3 px-6 w-full;
+    @apply flex flex-col items-start gap-x-5;
+    @apply text-gray-900;
+}
+
+.icon-menu a {
+    @apply hover:bg-gray-100;
+}
+
+.icon-menu a:hover {
+        border-radius: 8px;
+}
+
+.icon-menu > a.disabled {
+    @apply text-gray-500;
+}
+
+.icon-menu img, .icon-menu svg {
+    @apply h-6;
+}
+
+.icon-menu .nested {
+    @apply mt-3;
+}
+
+.icon-menu .nested > * {
+    @apply py-2 px-0 mt-1;
+    @apply text-sm text-gray-700 leading-5;
+}
+
+/* -------------------------------------------- */
+.fancy-select + .select2{
+    height: 45px;
+}
+
+.fancy-select + .select2 + .select2-container .select2-dropdown{
+    border: 1px solid #D0D5DD!important;
+    border-radius: 8px!important;
+    overflow: hidden;
+}
+
+.fancy-select + .select2 + .select2-container .select2-dropdown--above{
+    bottom: 5px;
+    position: relative;
+    display: block;
+}
+
+.fancy-select + .select2 + .select2-container .select2-dropdown--below{
+    top: 5px;
+    position: relative;
+    display: block;
+} 
+
+.fancy-select + .select2 .select2-selection{
+    border: 1px solid #D0D5DD;
+    border-radius: 8px;
+    transition: all 300ms;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    height: 100%;
+}
+
+.fancy-select + .select2 .select2-selection:hover{
+    @apply bg-gray-50;
+}
+
+.fancy-select + .select2 [aria-expanded="true"].select2-selection{
+    @apply rounded-lg !important;
+    border: 1px solid rgba(71, 84, 103, 1);
+}
+
+.fancy-select + .select2 .select2-selection__rendered{
+   height: 100%;
+   @apply flex items-center px-[16px] !important
+}
+
+.fancy-select + .select2 .select2-selection__arrow{
+    background-image: url(/assets/svg/generic/chevron-down.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    width: 10px!important;
+    height: 45px!important;
+    margin-right: 16px;
+}
+
+.fancy-select + .select2 [aria-expanded="true"].select2-selection .select2-selection__arrow{
+    transform: rotate(180deg);
+}
+
+.fancy-select + .select2 .select2-selection__arrow b{
+    display: none;
+}
+
+.pill-select{
+    @apply relative;
+    max-height: 240px!important;
+    z-index: 999999;
+}
+.pill-select ul{
+    position: relative;
+    width: 100%;
+    max-height: 240px!important;
+    margin-top: 8px!important;
+}
+
+.pill-select .selected {
+    @apply flex flex-row;
+    @apply border border-gray-300 rounded-lg ;
+    z-index: 9999999;
+}
+
+.pill-select .selected .content {
+    @apply w-full flex flex-wrap items-center gap-2;
+    @apply h-10 px-3;
+}
+
+.pill-select .selected .affix {
+    @apply border-l border-gray-300;
+    @apply h-10 px-3 leading-10;
+}
+
+.pill-select .option {
+    @apply flex flex-row items-center px-1.5 h-5;
+    @apply bg-gray-100 rounded;
+}
+
+.pill-select .option span {
+    @apply text-gray-800 text-xs font-semibold;
+}
+
+.pill-select input[type=checkbox] {
+    @apply hidden;
+}
+
+.pill-select .expand {
+    @apply flex-grow;
+    @apply h-5 py-2 mr-1;
+    @apply cursor-pointer;
+}
+
+.pill-select .expand svg {
+    @apply float-right;
+}
+
+.pill-select .expand svg path {
+    @apply fill-gray-500;
+}
+
+.pill-select .options, #select2-profile_interests-results {
+    @apply flex flex-col;
+    @apply mt-2 py-2 z-50;
+    @apply max-h-96 overflow-y-auto;
+    @apply bg-white border border-gray-300 rounded-lg shadow-lg;
+}
+
+#select2-profile_interests-results{
+    margin-top: 0;
+    position: relative;
+    top: -8px;
+}
+
+.select2-dropdown{
+    border: none!important
+}
+
+.pill-select .options li {
+    @apply relative block py-2 px-4 w-full;
+    @apply flex flex-row items-center gap-2;
+    @apply cursor-pointer;
+}
+
+.pill-select .options li.active:after {
+    @apply absolute right-4 top-2;
+}
+
+.pill-select .options li:hover {
+    @apply bg-gray-100;
+}
+
+/* -------------------------------------------- */
+
+.tab-radio {
+    @apply flex flex-row gap-0;
+    @apply border border-gray-300 rounded-lg overflow-hidden;
+}
+
+.tab-radio .option {
+    @apply py-2.5 px-4;
+    @apply cursor-pointer text-sm font-semibold;
+}
+
+.tab-radio .checked {
+    @apply bg-primary-700 text-white;
+}
+
+/* -------------------------------------------- */
+
+.confirm-popup {
+    @apply mx-[1rem];
+    @apply flex flex-col gap-2;
+    @apply bg-white p-8 rounded-xl drop-shadow-xl;
+    max-width: 440px;
+    /* margin-top: 25vh; */
+    /* position: fixed; */
+}
+
+.confirm-slots {
+    @apply flex flex-col gap-2;
+    @apply bg-white p-8 rounded-xl drop-shadow-xl;
+    width: 570px;
+    /* margin-top: 25vh; */
+    /* position: fixed; */
+}
+
+.popUpOverlay{
+    background: #0007;
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999999;
+}
+
+/* @media screen and (min-width: 768px) {
+    .confirm-popup{
+       margin-left: 50vh;
+    }
+} */
+
+
+.confirm-popup h1, .confirm-popup h2 {
+    @apply font-semibold text-gray-900 text-center;
+}
+
+.confirm-popup h1 {
+    @apply text-xl;
+}
+
+.confirm-popup h2 {
+    @apply text-lg;
+}
+
+.confirm-popup p {
+    @apply text-base text-gray-600;
+}
+
+.confirm-popup p.error {
+    @apply text-danger-700 text-center;
+}
+
+.confirm-popup .buttons {
+    @apply flex flex-row gap-3;
+    @apply pt-4;
+}
+
+.confirm-popup .buttons button {
+    @apply grow;
+}
+
+/* -------------------------------------------- */
+
+.rich-text p {
+    min-height: 1.5rem;
+}
+
+/* -------------------------------------------- */
+
+.date-picker {
+    @apply w-full flex flex-col gap-4;
+}
+
+.date-picker .month {
+    @apply flex flex-row justify-between;
+    @apply text-base font-semibold text-gray-700;
+}
+
+.date-picker .calendar {
+    @apply grid grid-cols-7 justify-end;
+}
+
+.date-picker .calendar div {
+    @apply h-10 w-10 mx-auto;
+    @apply text-sm text-center;
+    line-height: 38px;
+}
+
+.date-picker .calendar .day-name {
+    @apply text-gray-900 font-semibold;
+}
+
+.date-picker .calendar .day {
+    @apply rounded-full;
+    @apply cursor-pointer;
+    @apply bg-gray-200;
+    @apply font-bold;
+}
+
+.date-picker .calendar .day.disabled {
+    @apply cursor-default text-gray-400 bg-white hover:text-gray-400;
+    @apply font-normal;
+}
+
+.date-picker .calendar .day.selected {
+    @apply bg-primary-700 text-white;
+}
+
+.date-picker .calendar .day.today {
+    @apply border border-gray-300;
+    @apply font-normal;
+}
+
+/* -------------------------------------------- */
+
+.event-type-pills {
+    @apply flex flex-row gap-1 mb-1.5;
+}
+
+.event-type-pills > div {
+    @apply py-0.5 px-1.5 rounded;
+    @apply text-sm font-semibold;
+}
+
+.event-type-pills .location {
+    @apply border border-gray-300;
+}
+
+.event-type-pills .price {
+    @apply bg-gray-100 text-gray-800;
+}
+
+.event-type-pills .paid {
+    @apply bg-secondary-50 text-secondary-700;
+}
+
+.event-type-pills .free {
+    @apply bg-success-50 text-success-700;
+}
+
+.type.free {
+    @apply bg-success-50 text-success-700 !important;
+}
+
+.social-icons {
+    @apply flex flex-row gap-2;
+}
+
+.social-icons > * {
+    @apply sm:h-10 sm:w-10 w-8 h-8 sm:p-2 p-1;
+    @apply bg-gray-100 rounded-lg;
+}
+
+.social-icons svg {
+    @apply h-6 w-6;
+}
+
+.hero-skills {
+    @apply flex flex-wrap gap-2;
+}
+
+.hero-skills > * {
+    @apply px-2 py-0.5 sm:px-3 sm:py-1.5;
+    @apply text-sm font-bold;
+    @apply border-none rounded-md bg-gray-100 text-gray-800;
+}
+
+/* tags start*/
+
+.tags{
+    @apply flex gap-3;
+}
+
+.tags.small{
+    @apply gap-1;
+}
+
+.tags.large{
+    @apply gap-2;
+}
+
+.tags a, .tags span{
+    @apply rounded flex items-center justify-center font-gantari;
+}
+.tags a.small, .tags span.small{
+    @apply font-bold text-xs pt-0.5 pb-0.5 pl-1.5 pr-1.5;
+    height: 21px;
+}
+
+.tags a.large, .tags span.large{
+    @apply font-bold text-sm pt-1.5 pb-1.5 pl-2.5 pr-2.5;
+    height: 32px;
+}
+
+.tags a.success, .tags span.success{
+    @apply bg-success-100 text-success-700;
+}
+
+.tags a.secondary, .tags span.secondary{
+    @apply bg-secondary-100 text-secondary-700;
+
+}
+
+.tags a.outlined, .tags span.outlined{
+    @apply bg-transparent border-solid border border-gray-300 text-gray-700;
+
+}
+
+.tags a.white, .tags span.white{
+    @apply bg-white border-solid border border-gray-300 text-gray-700;
+
+}
+
+.tags a.gray, .tags span.gray{
+    @apply bg-gray-100 text-gray-700 border-solid border border-gray-300;
+
+}
+
+.tags a.transparent, .tags span.transparent{
+    @apply bg-transparent text-gray-500 border-none text-sm;
+
+}
+
+.tags-slider a.small{
+    padding: 6px 12px;
+    border: 1px solid #D0D5DD;
+    border-radius: 6px;
+    display: block;
+    text-align:center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #101828;
+}
+
+/*Tags end*/
+
+/*Event item start*/
+.event-item{
+    @apply border-solid border border-gray-300 rounded-lg bg-white p-4 mt-3
+}
+
+.event-item p, .event-item a{
+    @apply text-gray-900 mt-2.5 mb-2 text-sm font-bold inline-flex;
+}
+/*Event item end*/
+
+/*Event carousel*/
+.event-carousel{
+    @apply flex;
+}
+.event-carousel img{
+    @apply w-full h-auto hover:cursor-pointer;
+   
+}
+
+.hero-wrapper .event-carousel,
+.profile .event-carousel
+{
+    @apply block;
+}
+
+.hero-wrapper .event-carousel img, 
+.profile .event-carousel img{
+    max-width: 150px;
+    object-fit: cover;
+}
+/*Event carousel end*/
+
+/*Modal*/
+.modal{
+    @apply bg-black/30
+}
+/*Modal end*/
+
+
+.form-field-bottom{
+    @apply text-gray-500 text-sm
+}
+
+.form-tags{
+    @apply flex gap-1 flex-wrap mt-3;
+}
+
+.form-tag{
+    @apply bg-gray-100 py-1 leading-5 px-3;
+    @apply flex flex-row justify-center items-center rounded-md text-sm text-gray-800;
+}
+
+.form-tag::after{
+  content: '';
+  background-image: url(/assets/svg/generic/close.svg);
+  background-size: cover;
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  left:5px;
+}
+
+.social-form-field{
+  content: '';
+  background-size: contain;
+  position: absolute;
+  background-repeat: no-repeat;
+  display: block;
+  width: 16px;
+  height: 16px;
+  left: 15px;
+  top: 53px;
+}
+
+.facebook{
+    background-image: url(/assets/svg/generic/facebook.svg);
+}
+
+.instagram{
+    background-image: url(/assets/svg/generic/instagram.svg);
+}
+.linkedin{
+    background-image: url(/assets/svg/generic/linkedin.svg);
+}
+
+.youtube{
+    background-image: url(/assets/svg/generic/youtube.svg);
+}
+
+.website{
+    background-image: url(/assets/svg/generic/website.svg);
+}
+
+.twitter{
+    background-image: url(/assets/svg/generic/twitter.svg);
+}
+
+.website{
+    background-image: url(/assets/svg/generic/website.svg);
+}
+
+.social-form-field + .form-field{
+    padding-left: 44px;
+}
+
+.accordion, .menu-accordion{
+    @apply pb-0 md:pb-4 px-0 md:px-0
+}
+
+.accordion .item, .menu-accordion .item{
+   @apply p-3 pl-0 md:py-6 border-b border-gray-200
+}
+
+.accordion .item:last-child, .menu-accordion .item:last-child{
+    @apply border-none
+}
+
+.accordion .trigger > h4, .menu-accordion .trigger > h4{
+    @apply text-base leading-7 tracking-normal text-left font-gantari text-gray-900 pb-2;
+    @apply flex justify-center
+}
+
+.accordion .panel, .menu-accordion .panel{
+    @apply text-sm md:text-lg leading-6 tracking-normal text-left font-gantari pr-8
+}
+
+.accordion .panel ol, .accordion .panel ul, 
+.menu-accordion .panel ol, .menu-accordion .panel ul
+{
+    @apply text-sm md:text-lg block leading-6 tracking-normal text-left pl-5
+}
+
+.accordion .panel ol, .menu-accordion .panel ol{
+    @apply list-decimal
+}
+
+.accordion .panel ul, .menu-accordion .panel ul{
+    @apply list-disc
+}
+
+.accordion .panel ol p, .accordion .panel ul p, .menu-accordion .panel ol p, .menu-accordion .panel ul p{
+    @apply font-gantari
+}
+
+
+.accordion .item.active{
+   /* background: red */
+}
+
+.accordion .trigger, .menu-accordion .trigger{
+    @apply relative flex justify-between items-center cursor-pointer
+}
+
+.accordion .trigger .icon, .menu-accordion .trigger .icon{
+    width: 12px;
+    height: 6px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    background-image: url(/assets/svg/generic/chevron-down.svg);
+    transition: all 300ms;
+}
+
+.accordion .trigger .icon.active, .menu-accordion .trigger .icon.active{
+    transform: rotate(180deg);
+}
+
+.accordion .panel, .accordion .sub-panel, .menu-accordion .panel, .menu-accordion .sub-panel{
+    @apply hidden
+}
+
+/*Icons*/
+
+.ico{
+    content: '';
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.ico.sm{
+    width: 14px;
+    height: 14px;
+}
+
+.ico.star{
+    background-image: url(/assets/svg/generic/star-ico.svg);
+}
+
+.admin-menu > ul{
+    @apply flex flex-col gap-[4px] px-[16px] my-[24px]
+}
+
+.admin-menu > ul > li > a, .admin-menu > ul > li > div{
+    @apply py-[12px] px-[16px] flex justify-start items-center text-gray-900 gap-[16px];
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.admin-menu > ul > li > a.active, .admin-menu > ul > li > div.active{
+    @apply py-[12px] px-[16px] flex justify-start items-center text-white bg-primary-600;
+    border-radius: 8px;
+}
+
+.admin-menu > ul > li > a.active path, .admin-menu > ul > li > div.active path{
+    @apply fill-white
+}
+
+.admin-menu > ul > li > a:hover path, .admin-menu > ul > li > div:hover path{
+    @apply fill-gray-600
+}
+
+.admin-menu > ul > li > a:hover{
+    @apply bg-gray-100 text-gray-900;
+}
+
+.admin-menu > ul > li > ul{
+    @apply flex flex-col gap-[4px]
+}
+.admin-menu > ul > li > ul a{
+    @apply text-gray-700;
+    border-radius: 0px;
+    padding: 8px 16px 8px 56px;
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
+
+}
+
+.admin-menu > ul > li > ul a:hover{
+    @apply text-gray-500
+}
+
+.admin-menu > ul > li > ul a.active{
+    @apply text-secondary-700
+}
+
+
+.admin-menu > ul > li > a.active:hover, .admin-menu > ul > li > div.active:hover{
+    @apply text-white bg-primary-500
+}
+
+.admin-menu > ul > li > a.active:hover path, .admin-menu > ul > li > div.active:hover path{
+    @apply fill-white
+}
+
+
+@media screen and (max-width: 640px){
+    .main-hero-menu, .admin-h-menu{
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+    }
+
+    .main-hero-menu:after, .admin-h-menu:after{
+        display: block;
+        content: "";
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .header-menu{
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+    }
+}
+
+.menu-notification{
+    position: relative;
+    cursor: default;
+ }
+
+ .menu-notification.show{
+    cursor: pointer;
+ }
+
+ .menu-notification > span{
+    display: none;
+ }
+
+ .menu-notification.show > span{
+    display: block;
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    top: 10px;
+    right: 14px;
+    background: linear-gradient(0deg, #D92D20, #D92D20);
+    border-radius: 50%;
+    border: 2px solid #2e324a;
+ }
+
+ .product .menu-notification.show > span, .course .menu-notification.show > span{
+    top: -2px;
+    right: 0;
+    border: none;
+    border: 2px solid #fff;;
+ }
+
+ .notification-container{
+    width: 400px;
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    top: 53px;;
+    z-index: 9999999999;
+    right: 0;
+ }
+
+ .product .notification-container{
+    top: 40px;
+ }
+
+ .menu-notification .over{
+    background: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 70px;
+    bottom: 0;
+    display: none;
+ }
+
+ .menu-notification .over.show{
+    display: none;
+ }
+
+ @media screen and (max-width: 640px){
+    .product .notification-container.header-menu{
+        border-radius: 0;;
+    }
+    .notification-container{
+       width:100vw;
+       right: -140px;
+     }
+
+     .product .notification-container{
+        width:100vw;
+        right: -64px;;
+      }
+
+     .menu-notification .over.show{
+        display: block;
+     }
+ }
+
+ .notification-container.header-menu .loading svg, .notification-container.header-menu .loading,
+ .loading-more,
+ .loading-more svg
+ {
+    width: 1.5rem!important;
+    height: 1.5rem!important;
+    padding: 0!important;
+    margin: 1.5rem auto!important;
+ }
+ .loading-more{
+    display: none;
+ }

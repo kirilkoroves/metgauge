@@ -1,0 +1,588 @@
+## "msgid"s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove "msgid"s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use "mix gettext.extract --merge" or "mix gettext.merge"
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=2\n"
+
+#: button.jsx:32
+msgid "Copied"
+msgstr "複製"
+
+#: picker.jsx:114
+msgid "End time"
+msgstr "結束時間"
+
+#: editor.jsx:184
+msgid "Enter a description"
+msgstr "描述細節"
+
+#: input.jsx:27
+msgid "Enter price"
+msgstr "輸入價格"
+
+#: menu.jsx:56
+#: menu.jsx:58
+msgid "No handle"
+msgstr "沒有手柄"
+
+#: menu.jsx:66
+msgid "Profile"
+msgstr "個人檔案"
+
+#: menu.jsx:70
+msgid "Account Settings"
+msgstr "帳號設定"
+
+#: menu.jsx:75
+msgid "Payment"
+msgstr "支付"
+
+#: menu.jsx:85
+#: menu.jsx:90
+msgid "My Hero Page"
+msgstr "我的英雄頁面"
+
+#: menu.jsx:89
+msgid "Product Site"
+msgstr "平台首頁"
+
+#: menu.jsx:98
+#: menu.jsx:102
+msgid "Sign Out"
+msgstr "登出"
+
+#: select.jsx:174
+msgid "Select date"
+msgstr "選擇日期"
+
+#: select.jsx:196
+msgid "Select time"
+msgstr "選擇時間"
+
+#: select.jsx:217
+#, fuzzy
+msgid "Available timeslots by seller on"
+msgstr "目前可預約時間段為"
+
+#: select.jsx:228
+msgid "In your local timezone"
+msgstr "在你的時區"
+
+#: select.jsx:247
+msgid "attendees"
+msgstr "參加者"
+
+#: select.jsx:258
+#, fuzzy
+msgid "Date & time:"
+msgstr "日期時間:"
+
+#: select.jsx:268
+msgid "Attendees"
+msgstr "參加者"
+
+#: select.jsx:280
+#: select.jsx:310
+msgid "Wanna propose a slot?"
+msgstr "有其他想申請的時間段嗎？"
+
+#: select.jsx:281
+#: select.jsx:311
+#, fuzzy
+msgid "Propose a request in your local timezone"
+msgstr "提出你希望的時間段"
+
+#: select.jsx:281
+#: select.jsx:311
+msgid "and you will receive notice if seller can make it."
+msgstr "如果賣方可以配合，你將收到通知"
+
+#: select.jsx:283
+#: select.jsx:313
+#, fuzzy
+msgid "Request a slot"
+msgstr "請求時間段"
+
+#: select.jsx:293
+#: select.jsx:302
+#: select.jsx:319
+#: actions.jsx:93
+#: form.jsx:828
+#: form.jsx:1139
+#: form.jsx:1211
+#: form.jsx:110
+#: form.jsx:449
+msgid "Cancel"
+msgstr "取消"
+
+#: select.jsx:294
+msgid "Select Date"
+msgstr "選擇日期"
+
+#: select.jsx:304
+msgid "Select Time"
+msgstr "選擇時間"
+
+#: select.jsx:321
+#: select.jsx:321
+msgid "Click here to attend"
+msgstr "點擊此處參加"
+
+#: select.jsx:354
+msgid "hr"
+msgstr "小時"
+
+#: select.jsx:355
+msgid "min"
+msgstr "分"
+
+#: actions.jsx:19
+msgid "Copy"
+msgstr "複製"
+
+#: actions.jsx:46
+#: actions.jsx:51
+#: form.jsx:332
+#: form.jsx:337
+#: form.jsx:72
+#: form.jsx:77
+#: form.jsx:114
+#: form.jsx:118
+#: form.jsx:137
+#: form.jsx:141
+#: form.jsx:174
+#: form.jsx:178
+#: form.jsx:315
+msgid "Sorry, something went wrong"
+msgstr "抱歉，出了一些問題"
+
+#: actions.jsx:70
+#: form.jsx:219
+msgid "Edit"
+msgstr "編輯"
+
+#: actions.jsx:73
+msgid "Clone"
+msgstr "複製服務"
+
+#: actions.jsx:76
+#: actions.jsx:97
+#: form.jsx:224
+msgid "Delete"
+msgstr "刪除"
+
+#: actions.jsx:87
+#, fuzzy
+msgid "Are you sure you want to delete the \"$name\" event type?"
+msgstr "你確定要刪除\"$name\"服務類型嗎？"
+
+#: actions.jsx:89
+msgid ""
+"The scheduled events associated with this event type will remain even if "
+"this event type is deleted."
+msgstr "即使刪除此事件類型，與此事件類型相關的計劃事件也將保留。"
+
+#: form.jsx:61
+msgid "Create a new event type"
+msgstr "新增服務類型"
+
+#: form.jsx:89
+msgid "Back"
+msgstr "回上一頁"
+
+#: form.jsx:93
+msgid "Setup interview"
+msgstr "設定面試"
+
+#: form.jsx:94
+msgid "Edit event type"
+msgstr "編輯服務類型"
+
+#: form.jsx:94
+msgid "Create new event type"
+msgstr "新增服務類型"
+
+#: form.jsx:100
+msgid "You can create multiple event types to provide different services."
+msgstr "可以創建多種服務類型來提供不同的服務。"
+
+#: form.jsx:135
+msgid "Maximum allowed video size is 30MB"
+msgstr "最大允許的視頻尺寸為30MB"
+
+#: form.jsx:153
+msgid "You can select maximum 10 images"
+msgstr "最多可以上傳10張圖片"
+
+#: form.jsx:320
+#: form.jsx:67
+#: form.jsx:309
+msgid "Please correct the errors highlighted above"
+msgstr "請更正上面突出顯示的錯誤"
+
+#: form.jsx:341
+msgid "Network connection issue"
+msgstr "網絡連接問題"
+
+#: form.jsx:348
+msgid "You need to provide name and select category are required to generate."
+msgstr "需要提供服務名稱跟類別才能產生內容。"
+
+#: form.jsx:398
+#: form.jsx:407
+msgid "Event type name"
+msgstr "服務類型的名稱"
+
+#: form.jsx:403
+#: form.jsx:770
+msgid "URL of this service"
+msgstr "此服務的URL網址"
+
+#: form.jsx:414
+msgid "Category"
+msgstr "類別"
+
+#: form.jsx:420
+#, fuzzy
+msgid "Select category"
+msgstr "選擇類別"
+
+#: form.jsx:429
+msgid "Course Category"
+msgstr "課程類別"
+
+#: form.jsx:435
+#, fuzzy
+msgid "Select course category"
+msgstr "選擇類別"
+
+#: form.jsx:446
+msgid "Course Subcategory"
+msgstr "課程子類別"
+
+#: form.jsx:452
+#, fuzzy
+msgid "Select course subcategory"
+msgstr "選擇類別"
+
+#: form.jsx:463
+msgid "Language"
+msgstr "語言"
+
+#: form.jsx:469
+#: form.jsx:1124
+#: form.jsx:1130
+#, fuzzy
+msgid "Select language"
+msgstr "選擇語言"
+
+#: form.jsx:478
+#, fuzzy
+msgid "Languages"
+msgstr "語言"
+
+#: form.jsx:488
+msgid "For Business"
+msgstr "企業用"
+
+#: form.jsx:496
+msgid "Event image"
+msgstr "服務的示意圖"
+
+#: form.jsx:497
+msgid "You can upload up to 10 images"
+msgstr "最多可以上傳10張圖片"
+
+#: form.jsx:538
+msgid "Change image"
+msgstr "更改"
+
+#: form.jsx:543
+msgid "Remove"
+msgstr "移除"
+
+#: form.jsx:560
+msgid "Upload image"
+msgstr "新增"
+
+#: form.jsx:569
+#: form.jsx:571
+#, fuzzy
+msgid "Upload video"
+msgstr "新增"
+
+#: form.jsx:591
+msgid "Description"
+msgstr "描述"
+
+#: form.jsx:595
+#, fuzzy
+msgid "ChatGPT Auto Generator"
+msgstr "ChatGPT 自動生成"
+
+#: form.jsx:607
+msgid "Location"
+msgstr "服務提供地點"
+
+#: form.jsx:613
+#, fuzzy
+msgid "Select location"
+msgstr "選擇服務提供地點"
+
+#: form.jsx:621
+#: form.jsx:623
+msgid "In-person location"
+msgstr "線下服務的地點"
+
+#: form.jsx:634
+msgid "Duration"
+msgstr "服務時間"
+
+#: form.jsx:656
+msgid "Event type"
+msgstr "服務類型"
+
+#: form.jsx:669
+msgid "Price"
+msgstr "價格"
+
+#: form.jsx:672
+msgid ""
+"No upfront cost! For every dollar sold, you take 80% and we take 20% "
+"commission"
+msgstr "無初期費用。只有在服務售出後，我們才會收取20％的平台使用費。"
+
+#: form.jsx:689
+#: form.jsx:730
+msgid "Buyer Pays"
+msgstr "買家付的金額"
+
+#: form.jsx:697
+#: form.jsx:738
+msgid "Platform Fee"
+msgstr "平台使用費"
+
+#: form.jsx:704
+#: form.jsx:745
+msgid "You Receive"
+msgstr "你的報酬"
+
+#: form.jsx:715
+#, fuzzy
+msgid "Rent price"
+msgstr "輸入價格"
+
+#: form.jsx:756
+msgid "Discount"
+msgstr "折扣"
+
+#: form.jsx:763
+#, fuzzy
+msgid "Enter discount"
+msgstr "輸入折扣"
+
+#: form.jsx:779
+msgid "Buyers can’t purchase within…"
+msgstr "買家在服務開始的"
+
+#: form.jsx:786
+msgid "before start time"
+msgstr "之前可以預約。"
+
+#: form.jsx:793
+msgid "Booking limit"
+msgstr "可預約的人數上限"
+
+#: form.jsx:798
+msgid "Select booking limit"
+msgstr "選擇可預約的人數上限"
+
+#: form.jsx:801
+#, fuzzy
+msgid "You can set the booking limit to max 500"
+msgstr "人數上限最大為500人"
+
+#: form.jsx:808
+msgid "Available slots"
+msgstr "可預約的時間段"
+
+#: form.jsx:832
+#, fuzzy
+msgid "Save event type"
+msgstr "儲存設定"
+
+#: form.jsx:832
+#, fuzzy
+msgid "Create event type"
+msgstr "新增服務類型"
+
+#: form.jsx:862
+msgid "Hr"
+msgstr "小時"
+
+#: form.jsx:863
+msgid "Select hours"
+msgstr "選擇小時數"
+
+#: form.jsx:872
+#: form.jsx:878
+msgid "Min"
+msgstr "分"
+
+#: form.jsx:873
+#, fuzzy
+msgid "Select minutes"
+msgstr "選擇分數"
+
+#: form.jsx:912
+msgid "Day"
+msgstr "天"
+
+#: form.jsx:921
+msgid "Hour"
+msgstr "小時"
+
+#: form.jsx:996
+msgid "Add new language"
+msgstr "添加新語言"
+
+#: form.jsx:1102
+#: form.jsx:234
+msgid "Add slot"
+msgstr "增加可提供服務的時間"
+
+#: form.jsx:1132
+msgid "Enter name"
+msgstr "輸入名字"
+
+#: form.jsx:1145
+#: form.jsx:1217
+#, fuzzy
+msgid "Confirm"
+msgstr "確認"
+
+#: form.jsx:1188
+msgid "Select the event date"
+msgstr "追加可以提供服務的時間段"
+
+#: form.jsx:1190
+#: form.jsx:253
+msgid "Select the event start time"
+msgstr "選擇服務開始的時間"
+
+#: form.jsx:1194
+#: form.jsx:422
+msgid "Repeat"
+msgstr "重複"
+
+#: form.jsx:1202
+#: form.jsx:430
+#, fuzzy
+msgid "Select the event end date"
+msgstr "追加可以提供服務的時間段"
+
+#: menu.jsx:66
+msgid "Go to admin"
+msgstr "管理介面"
+
+#: menu.jsx:76
+#: menu.jsx:136
+msgid "Home"
+msgstr "儀表板"
+
+#: menu.jsx:80
+msgid "Explore Talent"
+msgstr "探索服務"
+
+#: menu.jsx:117
+msgid "Become a timely hero."
+msgstr "想成為時間英雄"
+
+#: menu.jsx:118
+msgid "Join now to sell your time."
+msgstr "加入我們來展示你的技能"
+
+#: menu.jsx:124
+#, fuzzy
+msgid "Sign up"
+msgstr "註冊"
+
+#: menu.jsx:127
+msgid "Sign in"
+msgstr "登入"
+
+#: menu.jsx:140
+msgid "Explore Services"
+msgstr "探索技能服務"
+
+#: form.jsx:23
+msgid "Interview"
+msgstr ""
+
+#: form.jsx:87
+msgid "Do you want to report ?"
+msgstr "需要什麼幫助嗎?"
+
+#: form.jsx:90
+msgid ""
+"Please describe as detail as possible, our customer service team will get "
+"back to you soon."
+msgstr "請盡量描述細節，我們的客服部會很快與你聯繫。"
+
+#: form.jsx:108
+msgid "Submit"
+msgstr "提交"
+
+#: form.jsx:197
+msgid "Current slots"
+msgstr "目前可被預約的時間段"
+
+#: form.jsx:197
+msgid "Add more slots to get more bookings"
+msgstr "增加時間段來獲得更多預約"
+
+#: form.jsx:249
+#, fuzzy
+msgid "Add time slot"
+msgstr "增加可被預約的時間段"
+
+#: form.jsx:249
+msgid "Edit time slot"
+msgstr "編輯可被預約的時間段"
+
+#: form.jsx:253
+msgid "Add"
+msgstr "新增"
+
+#: form.jsx:253
+msgid "Update"
+msgstr "更新"
+
+#: form.jsx:327
+msgid "Enter your email"
+msgstr "輸入郵件信箱"
+
+#: form.jsx:333
+msgid "Email"
+msgstr "電子郵件"
+
+#: form.jsx:343
+#, fuzzy
+msgid "Select the requested slot start time"
+msgstr "選擇你希望服務開始的日期及時間"
+
+#: form.jsx:344
+#: form.jsx:345
+msgid "Request slot"
+msgstr "提出時間申請"
+
+#: form.jsx:440
+msgid "Slot"
+msgstr "時間段"

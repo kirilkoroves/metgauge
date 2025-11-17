@@ -1,0 +1,64 @@
+<h2><%= gettext("Notifications") %></h2>
+<div class="notifications">
+    <%= render "_user_notifications_lazy.html", conn: @conn, user_notifications: @user_notifications %>
+    <div class="animate-spin loading-more">
+        <%= Heroicons.icon("arrow-path", type: "outline", class: "h-5 w-5") %>
+    </div>
+</div>
+
+<script>
+    var limit = 10;
+    var offset = 10;
+    var reachedEnd = false;
+    var isActive = false;
+
+    $(document).ready(function(){
+        removeDuplicateDivs();
+    });
+
+    $(window).scroll(function(){
+        if (!isActive && $(window).scrollTop() >= $(document).height() - $(window).height() - 50){
+            isActive = true;
+            getNotifications();
+        }
+    });
+
+     function getNotifications(){
+        if(reachedEnd){
+            return;
+        }
+        $(".loading-more").show();
+        $.ajax({
+            url: "/admin/user_notifications_lazy?limit="+limit+"&offset="+offset,
+            method: "GET",
+            success: function(response){
+                isActive = false;
+                if(response.reachedEnd){
+                    reachedEnd = response.reachedEnd;
+                }else{
+                    offset += limit;
+                    $(".notifications").append(response);
+                    removeDuplicateDivs();
+                }
+                 $(".loading-more").hide();
+            }
+        })
+    }
+
+    function removeDuplicateDivs(){
+        var divs = $(".notification-date-title");
+        var existing_divs = [];
+        for(var i=0;i<divs.length;i++){
+            if(existing_divs.indexOf($(divs[i]).text()) > -1){
+                var html_content = $(divs[i]).next().find(".notifications-wrapper").html();
+                $(divs[i-1]).next().find(".notifications-wrapper").append(html_content);
+                $(divs[i]).next().remove();
+                $(divs[i]).remove();
+
+            }
+            else{
+                existing_divs.push($(divs[i]).text());                
+            }
+        }
+    }
+</script>

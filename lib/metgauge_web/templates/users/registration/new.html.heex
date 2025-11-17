@@ -1,0 +1,13 @@
+<div class="popup-form first-section">
+  <div class="headings">
+    <h2><%= gettext "Create an account" %></h2>
+  </div>
+
+  <%= render "form.html", Map.put(assigns, :action, Routes.user_registration_path(@conn, :create)) %>
+</div>
+
+<style>
+  .invalid-feedback {
+    display: unset;
+  }
+</style>

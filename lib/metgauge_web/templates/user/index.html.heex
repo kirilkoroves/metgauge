@@ -1,0 +1,100 @@
+<h2 class="grow shrink-0" style="display: flex; justify-content: space-between;">
+  <%= gettext "Users" %>
+</h2>
+
+<div class="admin-home-wrapper">
+    <div class="booking-flow-main steps first-section">
+      <div class="right slot-widget-div" style="width: 100%">
+          <div class="filters" style="margin-left: 0.5rem; margin-right: 0.5rem;height: unset;padding-bottom: 1.5rem;">
+            <%= form_for @conn, Routes.admin_user_path(@conn, :index), [method: "get", style: "margin-top: 2rem;"], fn _f -> %>
+              <div class="filter-item search-f" style="display: flex;gap: 1rem;">
+                  <input type="text" id="filter_name" name="search_term" value={@search_term} placeholder={gettext "Filter by name"}/>
+                  <select id="filter_status" name="status">
+                    <option value="active"><%= gettext "Active" %></option>
+                    <option value="archive"><%= gettext "Archived" %></option>
+                  </select>
+                  <input type="submit" value={gettext "Filter"} class="btn primary filter-submit" />
+              </div>
+            <% end %>
+          </div>
+          <div id="table_users">
+            <%= render "_user_list.html", assigns %>
+          </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+  id="deleteModal" tabindex="-1" aria-labelledby="subscribeModal" aria-hidden="true">
+  <div class="modal-dialog relative w-auto pointer-events-none">
+    <div
+      class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+      <div
+        class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+        <h5 class="text-xl font-medium leading-normal text-gray-800" id="bookingModalLabel"><%= gettext "Archive User" %></h5>
+        <button type="button"
+          class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body relative p-4">
+        <h5 class="leading-[20px] text-gray-700 mb-[4px] mt-[1.5rem]"><%= gettext("Are you sure you want to deactivate this user?") %></h5>
+      </div>
+      
+      <div
+        class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md" style="flex-direction: row;justify-content: center;padding-top: 1rem;">
+        <button type="button" class="btn secondary" data-bs-dismiss="modal" aria-label="Close"><%= gettext("Close") %></button>
+        <button class="primary text-white confirm-delete-btn" data-id=""><%= gettext "Archive" %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+  id="activateModal" tabindex="-1" aria-labelledby="subscribeModal" aria-hidden="true">
+  <div class="modal-dialog relative w-auto pointer-events-none">
+    <div
+      class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+      <div
+        class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+        <h5 class="text-xl font-medium leading-normal text-gray-800" id="bookingModalLabel"><%= gettext "Activate User" %></h5>
+        <button type="button"
+          class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body relative p-4">
+        <h5 class="leading-[20px] text-gray-700 mb-[4px] mt-[1.5rem]"><%= gettext("Are you sure you want to activate this user?") %></h5>
+      </div>
+      
+      <div
+        class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md" style="flex-direction: row;justify-content: center;padding-top: 1rem;">
+        <button type="button" class="btn secondary" data-bs-dismiss="modal" aria-label="Close"><%= gettext("Close") %></button>
+        <button class="primary text-white confirm-activate-btn" data-id=""><%= gettext "Activate" %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    table, th, tr, td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+        text-align: left;
+    }
+
+    tr:nth-child(odd){background-color: #f2f2f2;}
+    tr:hover {background-color: #ddd;}
+
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #004e7d;
+      color: white;
+    }
+</style>
+
+<script defer type="text/javascript" src={Routes.static_path(@conn, "/assets/js/user.js")}></script>
+<script type="text/javascript">
+  $("[value='<%= @status %>']").attr("selected", "selected");
+</script>

@@ -1,0 +1,7 @@
+<div class="admin-home-wrapper">
+    <div class="booking-flow-main steps first-section">
+      <%= render "_form.html", Map.put(assigns, :title, gettext("Edit Client")) %>
+    </div>
+</div>
+
+<script defer type="text/javascript" src={Routes.static_path(@conn, "/assets/js/client.js")}></script>

@@ -1,0 +1,19 @@
+<% subscription_button_class = 
+    if @conn.assigns[:profile] != nil and @conn.assigns.profile.subscription_trial_end == nil do
+      "subscription_button"
+    else
+      ""
+    end 
+%>
+
+<h2 class="grow shrink-0">
+  <%= gettext "Access Denied" %>
+</h2>
+
+<div class="admin-home-wrapper admin-section">
+    <div class="event-items">
+        <h4><%= @message %></h4>
+        <div style="box-shadow: none;padding-left: 0px;"><%= @text |> raw() %></div>
+        <a href={@button_action} class={"btn primary submit-btn "<>subscription_button_class}><%= @button_text %></a>
+    </div>
+</div>

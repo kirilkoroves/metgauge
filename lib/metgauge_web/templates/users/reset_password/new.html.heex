@@ -1,0 +1,33 @@
+<div class="popup-form first-section">
+  <a href={Routes.user_session_path(@conn, :new)}>
+    <p class="back">
+      <%= Heroicons.icon("arrow-left", type: "outline", class: "h-5 w-5 text-gray-700") %>
+      <%= gettext "Back" %>
+    </p>
+  </a>
+
+  <div class="headings">
+    <h2 class="flex flex-row gap-[1rem]">
+      <%= Heroicons.icon("lock-open", type: "outline", class: "h7 w-5 text-gray-700") %>
+      <%= gettext "Reset Password" %>
+    </h2>
+  </div>
+
+  <.form let={f} for={@changeset} action={Routes.user_reset_password_path(@conn, :create)} novalidate>
+    <div>
+      <%= label f, :email, gettext "Email" %>
+      <%= email_input f, :email %>
+      <%= error_tag(f, :email) %>
+    </div>
+
+    <%= submit gettext("Send reset link"), class: "dark" %>
+
+  </.form>
+
+</div>
+
+<style>
+  .invalid-feedback {
+    display: unset;
+  }
+</style>

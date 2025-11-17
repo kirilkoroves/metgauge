@@ -1,0 +1,10 @@
+<%= for {date, notifications} <- @user_notifications do %>
+    <h5 class="notification-date-title"><%= if date == gettext("Today"), do: gettext("Today"), else: gettext("Earlier")  %></h5>
+    <div class="notif-main">
+        <div class={"notifications-wrapper"}>
+            <%= for notification <- notifications do %>
+                <%= render "_user_notification.html", conn: @conn, user_notification: notification %>
+            <% end %>
+        </div>
+    </div>
+<% end %>

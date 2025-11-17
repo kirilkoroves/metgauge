@@ -1,0 +1,37 @@
+<div class="popup-form first-section">
+  <div class="headnigs">
+    <h2><%= gettext "Login" %></h2>
+  </div>
+
+  <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user} novalidate>
+    <div>
+      <%= label f, :email, gettext "Email" %>
+      <%= email_input f, :email %>
+    </div>
+
+    <div class="relative">
+      <a href="" class="show-pass">
+         <div class="hide-pass-line"></div>
+        <%= icon("eye", type: "outline", class: "icon-xs") %>
+        <div class="hide-pass-line"></div>
+      </a>
+      <%= label f, :password, gettext "Password" %>
+      <%= password_input f, :password, class: "pass" %>
+    </div>
+
+    <div class="flex flex-col gap-[0.75rem]">
+      <%= submit gettext("Sign in"), class: "dark h-[48px]" %>
+    </div>
+  </.form>
+
+  <p class="footnote">
+    <%= gettext "Forgot your password?" %>
+    <%= link gettext("Click here"), to: Routes.user_reset_password_path(@conn, :new), class: "text-secondary-700" %>
+  </p>
+</div>
+
+<style>
+  .invalid-feedback {
+    display: unset;
+  }
+</style>

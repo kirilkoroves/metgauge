@@ -1,0 +1,75 @@
+<%= form_for @changeset, @form_url, [method: :post, class: "flex flex-col gap-4 h-full", enctype: "multipart/form-data", multipart: true, style: "width: 100%;", name: "client"], fn f -> %>
+  <div style="display: flex; flex-direction: row;">
+    <div class="right slot-widget-div" style="width: 100%">
+      <div>
+        <h5><%= @title %></h5>
+        <div class="w-full full">
+          <div class="full-col">
+            <label for=""><%= gettext "Name" %></label>
+            <%= text_input f, :name, class: "form-field", placeholder: gettext("Name"), maxlength: "400" %>
+            <%= label f, :name, class: "invalid-feedback" %>
+          </div>
+        </div>
+        <div class="w-full full">
+          <div class="full-col">
+            <label for=""><%= gettext "Address" %></label>
+            <%= text_input f, :address, class: "form-field", placeholder: gettext("Address"), id: "address" %>
+            <%= label f, :address, class: "invalid-feedback" %>
+          </div>
+        </div>
+        <div class="w-full full">
+            <div class="half-col">
+                <%= label(f, :city, gettext("City")) %>
+                <%= text_input f, :city, class: "form-field", placeholder: gettext("City"), id: "city" %>
+                <%= label f, :city, class: "invalid-feedback" %>
+            </div>
+            <div class="half-col">
+                <%= label(f, :state, gettext("State")) %>
+                <%= text_input f, :state, class: "form-field", placeholder: gettext("State"), id: "state" %>
+                <%= label f, :state, class: "invalid-feedback" %>
+            </div>
+
+            <div class="half-col">
+                <%= label(f, :zip, gettext("Zip")) %>
+                <%= text_input f, :zip, class: "form-field", placeholder: gettext("Zip"), id: "zip" %>
+                <%= error_tag(f, :zip) %>
+            </div>
+        </div>
+        <div class="w-full full">
+            <div class="half-col">
+                <%= label(f, :customer_email, gettext("Customer Email")) %>
+                <%= text_input f, :customer_email, class: "form-field", placeholder: gettext("Customer Email") %>
+                <%= label f, :customer_email, class: "invalid-feedback" %>
+            </div>
+            <div class="half-col">
+                <%= label(f, :customer_phone, gettext("Customer Phone")) %>
+                <%= text_input f, :customer_phone, class: "form-field", placeholder: gettext("Customer Phone") %>
+                <%= label f, :customer_phone, class: "invalid-feedback" %>
+            </div>
+        </div>
+        <%= submit raw(gettext("Save")), class: "primary submit-btn" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyChOui4dw3ctxsdzIurZgeHf8SfanLA7Ec"></script>
+<script>
+    var autocomplete = new google.maps.places.Autocomplete($("#address")[0], {});
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        var address_components = place.address_components;
+        for(var i=0;i<address_components.length;i++){
+          if(address_components[i].types.indexOf("locality") != -1){
+            $("#city").val(address_components[i].long_name )
+          }
+          if(address_components[i].types.indexOf("administrative_area_level_1") != -1){
+            $("#state").val(address_components[i].long_name )
+          }
+          if(address_components[i].types.indexOf("postal_code") != -1){
+            $("#zip").val(address_components[i].long_name )
+          }
+        }
+        
+    });
+</script>

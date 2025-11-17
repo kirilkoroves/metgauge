@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang={html_lang(@conn)}>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content={csrf_token_value()}>
+    <%= live_title_tag assigns[:page_title] || gettext("MetGauge") %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js" integrity="sha512-j+F4W//4Pu39at5I8HC8q2l1BNz4OF3ju39HyWeqKQagW6ww3ZF9gFcu8rzUbyTDY7gEo/vqqzGte0UPpo65QQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href={Routes.static_path(@conn, "/assets/images/apple-touch-icon.png")}>
+    <link rel="icon" type="image/png" sizes="32x32" href={Routes.static_path(@conn, "/assets/images/icon-32x32.png")}>
+    <link rel="icon" type="image/png" sizes="16x16" href={Routes.static_path(@conn, "/assets/images/icon-16x16.png")}>
+    <link rel="manifest" href={Routes.static_path(@conn, "/assets/images/site.webmanifest")}>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GFQ1V6EY7V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GFQ1V6EY7V');
+    </script>
+    <script>
+        function getUrlVars()
+        {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                if(hash[0] != window.location.href){
+                  vars.push(hash[0]);
+                  vars[hash[0]] = hash[1];
+                }
+            }
+            return vars;
+        }
+        <%= if @conn.assigns.profile != nil do %>
+          window.locale = "<%= if Map.get(@conn.assigns, :locale, "en") == "zh_TW", do: "zh", else: Map.get(@conn.assigns, :locale, "en") %>";
+          window.user_id = <%= @conn.assigns.profile.id %>;
+        <% end %>
+    </script>
+
+  </head>
+  <body class={"admin font-gantari #{@conn.assigns.locale} #{Map.get(assigns, :layout_class, "")}"}>
+      <header>
+        <div class="logo">
+          <a href={}>
+            <img src={Routes.static_path(@conn, "/assets/images/logo.png")} />
+          </a>
+        </div>
+        <hr class="w-3/4 mx-auto" />
+        <nav class="admin-menu">
+          <ul>
+            <%= if @conn.assigns.profile.role == "superadmin" do %>
+              <li>
+                <a href={Routes.admin_client_path(@conn, :index)} class={get_endpoint_active_class(@conn, Routes.admin_client_path(@conn, :index))}>
+                  <%= icon("building-office-2", type: "solid", class: "h-5 w-5") %>
+                  <div class="link-name"><%= gettext("Clients") %></div>
+                </a>
+              </li>
+              <li>
+                <a href={Routes.admin_user_path(@conn, :index)} class={get_endpoint_active_class(@conn, Routes.admin_user_path(@conn, :index))}>
+                  <%= Heroicons.icon("users", type: "solid", class: "h-5 w-5") %>
+                  <div class="link-name"><%= gettext("Users") %></div>
+                </a>
+              </li>
+            <% else %>
+              <li>
+                <a href={Routes.admin_path(@conn, :index)} class={get_endpoint_active_class(@conn, Routes.admin_path(@conn, :index))}>
+                  <%= icon("home", type: "solid", class: "h-5 w-5") %>
+                  <div class="link-name"><%= gettext "Dashboard" %></div>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+
+        </nav>
+      </header>
+
+
+      <nav class="topbar">
+          <div class="logo">
+            <a href={Routes.page_path(@conn, :index)}>
+              <img src={Routes.static_path(@conn, "/assets/images/logo.png")} />
+            </a>
+          </div>
+            <ul>
+              <% class = if Enum.count(@profile.unanswered_user_notifications) > 0, do: "show", else: "" %>
+              <li class="square menu-notification show">
+                <%= if class != "" do %>
+                  <span></span>
+                <% end %>
+                <%= icon("bell", type: "outline", class: "h-5 w-5") %>
+                <div class="notification-container hide header-menu">
+                  <div class="heading">
+                   <a href="" class="close_notifications" style="color: rgb(16 24 40)">
+                      <%= icon("x-mark", type: "outline", class: "h-5 w-5") %>
+                    </a>
+                    <h5><%= gettext "Notifications" %></h5>
+                    <a href={Routes.admin_path(MetgaugeWeb.Endpoint, :user_notifications)}>
+                    <span><%= gettext "All" %></span>
+                    </a>
+                  </div>
+                  <div class="animate-spin loading">
+                      <%= icon("arrow-path", type: "outline", class: "h-5 w-5") %>
+                  </div>
+                  <div class="notification-result"></div>
+                  <div class="animate-spin loading-more">
+                      <%= icon("arrow-path", type: "outline", class: "h-5 w-5") %>
+                  </div>
+                </div>
+
+              </li>
+              <li class={if @profile.avatar_path != "" and @profile.avatar_path != nil, do: "square menu white menu-item admin-menu menu-ham", else: "square menu menu-item admin-menu menu-ham"}>
+                  <div class="dropdown-link">
+                   <div class="user-avatar">
+                      <%= if  @conn.assigns.profile == nil or  @conn.assigns.profile.avatar_path == "" or  @conn.assigns.profile.avatar_path == nil do %>
+                        <%= icon("user", type: "outline", class: "h-5 w-5") %>
+                      <% else %>
+                          <img src={MetgaugeWeb.ProfileView.profile_image_url(@conn, @conn.assigns.profile)} />
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="dropdown">
+                   <!---MENU--->
+                  <ul class="menu">
+                    <div class="usr-section">
+                      <div class="user-avatar">
+                        <%= if  @conn.assigns.profile == nil or  @conn.assigns.profile.avatar_path == "" or  @conn.assigns.profile.avatar_path == nil do %>
+                          <img class="h-6 mx-auto my-3 no_pro_img" src="/assets/svg/generic/profile.svg" />
+                        <% else %>
+                          <img src={MetgaugeWeb.ProfileView.profile_image_url(@conn, @conn.assigns.profile)} />
+                        <% end %>
+                      </div>
+                      <div class="user-info">
+                        <div class="name"><%= @conn.assigns.profile.first_name %> <%= @conn.assigns.profile.last_name %></div>
+                      </div>
+                    </div>
+                    <div class="actions">
+                      <ul>
+                        <%= if @conn.assigns.profile.role == "superadmin" do %>
+                          <li class="show-mobile-item">
+                            <a href={Routes.admin_client_path(@conn, :index)}>
+                              <%= icon("building-office-2", type: "solid", class: "h-5 w-5") %>
+                              <div class="link-name"><%= gettext("Clients") %></div>
+                            </a>
+                          </li>
+                          <li class="show-mobile-item">
+                            <a href={Routes.admin_user_path(@conn, :index)}>
+                              <%= Heroicons.icon("users", type: "solid", class: "h-5 w-5") %>
+                              <div class="link-name"><%= gettext("Users") %></div>
+                            </a>
+                          </li>                          
+                        <% else %>
+                          <li class="show-mobile-item">
+                            <a href={Routes.admin_path(@conn, :index)}
+                            class={ get_endpoint_active_class(@conn, Routes.admin_path(@conn, :index)) }>
+                              <%= icon("home", type: "solid", class: "h-5 w-5") %>
+                              <div class="link-name"><%= gettext "Dashboard" %></div>
+                            </a>
+                          </li>
+                        <% end %>
+                        <li class="show-mobile-item no-hover" style="min-height: unset;"><hr></li>
+                        <li>
+                            <a href={Routes.admin_profile_path(@conn, :edit)}
+                            class={ get_endpoint_active_class(@conn, Routes.admin_profile_path(@conn, :edit)) }
+                            >
+                            <%= icon("pencil-square", type: "outline", class: "h-5 w-5") %>
+                            <%= gettext "Profile" %>
+                            </a>
+                        </li>
+                        <li class="flex">
+                          <a href={Routes.admin_path(MetgaugeWeb.Endpoint, :user_notifications)} class="text-gray-900">
+                            <%= icon("bell", type: "outline", class: "h-5 w-5") %>
+                            <%= gettext("Notifications") %>
+                          </a>
+                        </li>
+                        <li class="no-hover">
+                          <hr>
+                        </li>
+                        <li>
+                          <a href={Routes.user_session_path(@conn, :delete)} class="text-gray-500">
+                            <%= icon("power", type: "outline", class: "h-5 w-5") %>
+                            <%= gettext("Sign out") %>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </ul>
+                </div>
+                <div class="overlay"></div>
+                  <!--MENU END-->
+              </li>
+            </ul>
+        </nav>
+      <div class="admin-content">
+        <section class="page-content relative">
+          <%= @inner_content %>
+        </section>
+      </div>
+    <script defer type="text/javascript" src={Routes.static_path(@conn, "/assets/js/admin.js")}></script>
+    <script defer type="text/javascript" src={Routes.static_path(@conn, "/assets/js/lightbox.js")}></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src={Routes.static_path(@conn, "/assets/js/notifications.js")}></script>
+  <div id="overlay"></div>
+  </body>
+</html>

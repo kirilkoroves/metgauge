@@ -1,0 +1,35 @@
+body.registration, body.password-reset {
+    @apply bg-blue-gray-100;
+}
+
+
+.registration .page-content, .password-reset .page-content {
+    @apply z-20 h-[100%];
+}
+
+.registration .page-footer::before {
+    @apply hidden sm:block z-10;
+    /*content: url('/assets/images/two-folks.png');*/
+    position: absolute;
+    right: 15px;
+    top: -492px;
+    height: 492px;
+}
+
+
+.registration .page-content{
+    background-position: center bottom; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: 90%; /* Resize the background image to cover the entire container */
+    background-image: none;
+}
+
+@media  screen and (min-width: 1024px) {
+    .registration .page-content{
+        background-image: url('/assets/images/two-folks.png');
+    }
+}
+
+.show-pass, .show-pass-repeat{
+    @apply absolute right-[0.75rem] top-[2.4rem]
+}

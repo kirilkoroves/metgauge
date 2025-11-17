@@ -1,0 +1,27 @@
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+  id="googleIssueModal" tabindex="-1" aria-labelledby="googleIssueModal" aria-hidden="true">
+  <div class="modal-dialog relative w-auto pointer-events-none modal-dialog-centered">
+    <div
+      class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+      <div
+        class="modal-header">
+        <h5 class="text-base font-semibold leading-5 tracking-normal text-center"><%= gettext("Google Sign Up/Sign In Issue") %></h5>
+        <button type="button"
+          class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <%= gettext "Google Services do not work in the in-app browser. Please use another mobile browser (Chrome, Firefox, Safari, ...) to continue." %>
+        </div>
+      </div>
+      <div
+        class="modal-footer">
+        <!-- 
+          <button class="primary text-white copy-link" data-path="<%= Routes.user_oauth_url(@conn, :request, "google")%>"><%= gettext "Copy Link" %></button>
+        -->
+        <button type="button" class="btn primary" data-bs-dismiss="modal" aria-label="Close"><%= gettext("OK") %></button>
+      </div>
+    </div>
+  </div>
+</div>

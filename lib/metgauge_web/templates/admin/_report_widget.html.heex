@@ -1,0 +1,74 @@
+<div class="report-item">
+  <h5><%= gettext "New Clients" %></h5>
+  <span class="month_report_new_clients"><%= @report_data.new_clients %></span>
+</div>
+<div class="report-item">
+  <h5><%= gettext "Total Users" %></h5>
+  <span class="month_report_moves"><%= @report_data.total_users %></span>
+</div>
+ <div class="report-item">
+   <!---Chart-->
+     <canvas id="myChart"></canvas>
+</div>
+
+<script type="text/javascript">
+  var ctx = document.getElementById('myChart');
+  var labels = [];
+  var data = [];
+  var background_colors = [];
+  <%= for count_client <- @report_data.count_by_clients do %>
+    labels.push("<%= count_client.name %>");
+    data.push(<%= count_client.count %>);
+    background_colors.push("#E4E7EC");
+  <% end %>
+
+  background_colors[data.length -1] = "#004872";
+  var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Users per client",
+        data: data,
+        borderWidth: 2,
+        backgroundColor: background_colors,
+        hoverBackgroundColor: '#9298BE'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {display:false},
+        tooltip:{
+          yAlign: 'bottom',
+          displayColors: false,
+          padding: 12,
+          cornerRadius: 8,
+          backgroundColor: "#101828",
+          callbacks: {
+            title: function() {return ''},
+          },
+          bodyFont:{
+            weight: 500,
+            size: 12,
+            family: 'Arial',
+            lineHeight: 1.25
+          }
+        }
+        },
+      scales: {
+        y: {
+          display: false,
+          grid:{
+            display: false
+          }
+        },
+        x: {
+          grid:{
+            display: false
+          }
+        }
+      }
+    }
+  });
+</script>

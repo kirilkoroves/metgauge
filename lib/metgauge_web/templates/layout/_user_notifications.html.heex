@@ -1,0 +1,71 @@
+<nav class="icon-menu">
+  <%= for notification <- @user_notifications do %>
+    <% onclick_fn = if Enum.member?(["cancel_booking", "request_slot_response", "demo_video", "chatbot"], notification.type), do: "cancelRedirect('#{notification.link}')", else: "" %>
+    <% style = if Enum.member?(["cancel_booking", "request_slot_response", "demo_video", "chatbot"], notification.type), do: "cursor: pointer", else: "" %>
+    <% answered_class =  if notification.is_answered == false, do: "unanswered-notification notification-item-wrap", else: "notification-item-wrap"%>
+    <div class={answered_class} onclick={onclick_fn} style={style}>
+      <div class="date-time">
+        <%= MetgaugeWeb.AdminView.format_user_notification_datetime(@conn, notification.inserted_at) %>
+      </div>
+      <div class="main-content" style="width: 100%">
+        <div class="user-avatar">
+          <img src={Routes.static_url(MetgaugeWeb.Endpoint, "/assets/images/icon-32x32.ico")} class="notification-img default">
+        </div>
+        <div class="txt">
+          <p class="font-semibold">
+            <%
+              parameters = 
+                cond do
+                  notification.parameters == nil -> nil
+                  Enum.member?(Map.keys(notification.parameters), "event_date") ->
+                    date = 
+                      case Timex.parse(notification.parameters["event_date"], "{ISO:Extended}") do
+                        {:ok, date} -> MetgaugeWeb.AdminView.email_datetime(date, @conn.assigns.locale)
+                        _ -> notification.parameters["event_date"]
+                      end
+                    Map.put(notification.parameters, "event_date", date)
+                  Enum.member?(Map.keys(notification.parameters), "seller_event_date") ->
+                    date = 
+                      case Timex.parse(notification.parameters["seller_event_date"], "{ISO:Extended}") do
+                        {:ok, date} -> MetgaugeWeb.AdminView.email_datetime(date, @conn.assigns.locale)
+                        _ -> notification.parameters["seller_event_date"]
+                      end
+                    Map.put(notification.parameters, "seller_event_date", date)
+                  true -> notification.parameters
+                end
+            %>
+            <%= if parameters != nil do
+                  try do
+                    raw(Gettext.dgettext(MetgaugeWeb.Gettext, "default", notification.content, Keyword.new(parameters, fn {k,v} -> {String.to_existing_atom(k), v} end))) 
+                  rescue
+                    _ -> raw(notification.content)
+                  end
+                else
+                  raw(notification.content)
+                end
+            %>
+          </p>
+        </div>
+      </div>
+      <div class="btns">    
+        <%= if notification.type == "job" do %>
+          <a class="btn primary medium" href={notification.link}><%= gettext "View" %></a>
+        <% end %>
+      </div>
+    </div>
+    <hr/>
+  <% end %>
+  <!--<a href={Routes.admin_admin_path(MetgaugeWeb.Endpoint, :user_notifications)} class="todo">View all</a>-->
+</nav>
+
+<script>
+  $(document).ready(function(){
+    $(".download-main-calendar-btn").click(function(){
+      $(".download-main-calendar").html($(this).next(".event-calendar-options").html());
+    });
+  });
+
+  function cancelRedirect(link){
+    window.location.href=link;
+  }
+</script>

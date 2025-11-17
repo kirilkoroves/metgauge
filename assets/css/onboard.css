@@ -1,0 +1,44 @@
+.onboard .role-buttons {
+    @apply flex flex-col gap-[1rem] sm:gap-8;
+}
+
+.onboard .role-buttons button {
+    @apply w-full border border-gray-300 text-black;
+    @apply flex flex-col-reverse sm:flex-row justify-start gap-[1.25rem] sm:gap-[28px];
+    @apply py-[30px] px-[44px];
+    @apply bg-white hover:bg-gray-100;
+    @apply heading4;
+    @apply text-center;
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: 0px;
+}
+
+
+.onboard .progress-bar {
+    @apply absolute left-0 top-0 w-full h-2 bg-gray-300;
+};
+
+.onboard .progress-bar div {
+    @apply h-full bg-primary-600;
+}
+
+.onboard form {
+    @apply mt-2 gap-[1rem];
+}
+
+.onboard .popup-form{
+    @apply sm:w-[592px]
+}
+
+.youtube_link svg{
+    width: 1.5rem;
+    display: inline-block;
+    padding-right: 5px;
+}
+
+.youtube_link svg{
+    width: 1.5rem;
+    display: inline-block;
+    padding-right: 5px;
+}

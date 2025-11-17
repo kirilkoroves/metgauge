@@ -1,0 +1,5 @@
+<div class="validation-message">
+  <p class="alert alert-info" role="alert"><%= raw(get_flash(@conn, :info)) %></p>
+  <p class="alert alert-danger" role="alert"><%= raw(get_flash(@conn, :error)) %></p>
+</div>
+<%= @inner_content %>

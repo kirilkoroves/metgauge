@@ -1,0 +1,57 @@
+<div class="w-full full">
+    <div class="full-col profile" style="display: flex; flex-direction: row;">
+      <div class="avatar">
+        <img id="client-logo-img" src={logo_image_url(@conn, @changeset)} alt="Client logo" class={if Ecto.Changeset.get_field(@changeset, :logo) == "" or Ecto.Changeset.get_field(@changeset, :logo) == nil do "no_profile_img" end}/>
+      </div>
+      <div href="" class="avatar-edit-btns">
+          <%= file_input @f, :logo_path, style: "display: none" %>
+          <button type="primary" class="primary" id="upload-logo"><%= gettext("Upload") %></button>
+          <button class="secondary" id="remove-logo" style={if Ecto.Changeset.get_field(@changeset, :logo) == "" or Ecto.Changeset.get_field(@changeset, :logo) == nil do "display: none" end}><%= gettext("Remove") %></button>
+          <%= label @f, :logo, class: "invalid-feedback" %>
+      </div>
+    </div>
+</div>
+<div class="w-full full">
+  <div class="full-col">
+    <label for=""><%= gettext "Name" %></label>
+    <%= text_input @f, :name, class: "form-field", placeholder: gettext("Name"), maxlength: "400" %>
+    <%= label @f, :name, class: "invalid-feedback" %>
+  </div>
+</div>
+<div class="w-full full">
+  <div class="full-col">
+    <label for=""><%= gettext "Address" %></label>
+    <%= text_input @f, :address, class: "form-field", placeholder: gettext("Address"), id: "address" %>
+    <%= label @f, :address, class: "invalid-feedback" %>
+  </div>
+</div>
+<div class="w-full full">
+    <div class="half-col">
+        <%= label(@f, :city, gettext("City")) %>
+        <%= text_input @f, :city, class: "form-field", placeholder: gettext("City"), id: "city" %>
+        <%= label @f, :city, class: "invalid-feedback" %>
+    </div>
+    <div class="half-col">
+        <%= label(@f, :state, gettext("State")) %>
+        <%= text_input @f, :state, class: "form-field", placeholder: gettext("State"), id: "state" %>
+        <%= label @f, :state, class: "invalid-feedback" %>
+    </div>
+
+    <div class="half-col">
+        <%= label(@f, :zip, gettext("Zip")) %>
+        <%= text_input @f, :zip, class: "form-field", placeholder: gettext("Zip"), id: "zip" %>
+        <%= error_tag(@f, :zip) %>
+    </div>
+</div>
+<div class="w-full full">
+    <div class="half-col">
+        <%= label(@f, :customer_email, gettext("Customer Email")) %>
+        <%= text_input @f, :customer_email, class: "form-field", placeholder: gettext("Customer Email") %>
+        <%= label @f, :customer_email, class: "invalid-feedback" %>
+    </div>
+    <div class="half-col">
+        <%= label(@f, :customer_phone, gettext("Customer Phone")) %>
+        <%= text_input @f, :customer_phone, class: "form-field", placeholder: gettext("Customer Phone") %>
+        <%= label @f, :customer_phone, class: "invalid-feedback" %>
+    </div>
+</div>

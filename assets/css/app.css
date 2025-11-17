@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "./shared/alerts.css";
+@import "./shared/liveview.css";
+@import "./shared/fades.css";
+@import "./carousel/tiny-slider.css";
+
+@import url('https://rsms.me/inter/inter.css');
+
+@import "./shared/typography.css";
+@import "./shared/components.css";
+
+@import "./global.css";
+@import "./product.css";
+@import "./registration.css";
+@import "./admin.css";
+@import "./onboard.css";
+@import "./lightbox.min.css";
+@import "./dropzone.css";
+
+html { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}

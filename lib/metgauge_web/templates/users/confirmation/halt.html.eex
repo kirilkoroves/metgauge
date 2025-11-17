@@ -1,0 +1,15 @@
+<div class="popup-form first-section">
+      <div class="headings">
+         <h2 class="font-semibold"><%= gettext("Confirmation pending") %></h2>
+      </div>
+      <p class="text-gray-600">
+        <%= gettext("The company's administrator is notified for your registration.") %>
+        <br/>
+        <%= gettext(" You will be able to access the dashboard after approval.") %>
+      </p>
+      <%= if @conn.assigns.current_user do %>
+      <%= link("Resend Confirmation Request Email",
+      to: Routes.user_confirmation_path(@conn, :resend_confirmation),
+      class: "btn primary") %>
+      <% end %>
+</div>

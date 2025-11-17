@@ -1,0 +1,45 @@
+h6, .heading6 {
+    @apply text-base md:text-heading-6;
+    @apply leading-normal md:leading-snug;
+    @apply font-normal; /* Different from typography spec, but seems to be correct in layouts */
+}
+
+h5, .heading5 {
+    @apply text-heading-6 md:text-heading-5;
+    @apply leading-normal md:leading-snug;
+    @apply font-semibold;
+}
+
+h4, .heading4 {
+    @apply text-heading-5 md:text-heading-4;
+    @apply leading-normal md:leading-snug;
+    @apply font-semibold;
+}
+
+h3, .heading3 {
+    @apply text-heading-4 md:text-heading-3;
+    @apply leading-tight;
+    @apply font-semibold;
+}
+
+h2, .heading2 {
+    @apply text-heading-3 md:text-heading-2;
+    @apply font-bold;
+    line-height: 2.188rem;
+}
+
+@media screen and (min-width: 768px) {
+    h2, .heading2 {
+        line-height: 3.125rem;
+    }
+}
+
+h1, .heading1 {
+    @apply text-heading-2 md:text-heading-1;
+    @apply leading-tight;
+    @apply font-bold;
+}
+
+a{
+    @apply text-blue-link font-bold;
+}

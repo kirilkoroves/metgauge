@@ -1,0 +1,60 @@
+<% onclick_fn = if Enum.member?(["cancel_booking", "request_slot_response", "demo_video", "chatbot"], @user_notification.type), do: "cancelRedirect('#{@user_notification.link}')", else: "" %>
+<% style = if Enum.member?(["cancel_booking", "request_slot_response", "demo_video", "chatbot"], @user_notification.type), do: "cursor: pointer", else: "" %>
+<div class={if @user_notification.is_answered == false, do: "unanswered-notification notification-item", else: "notification-item"} onclick={onclick_fn} style={style}>
+  <div class="date-time">
+    <%= MoverAppWeb.AdminView.format_user_notification_datetime(@conn, @user_notification.inserted_at) %>
+  </div>
+  <div class="main-content">
+    <div class="user-avatar">
+      <img src={Routes.static_url(MoverAppWeb.Endpoint, "/assets/images/icon-32x32.png")} class="notification-img default">
+    </div>
+    <div class="txt">
+      <p>
+        <%
+          parameters = 
+            cond do
+              @user_notification.parameters == nil -> nil
+              Enum.member?(Map.keys(@user_notification.parameters), "event_date") ->
+                date = 
+                  case Timex.parse(@user_notification.parameters["event_date"], "{ISO:Extended}") do
+                    {:ok, date} -> MoverAppWeb.AdminView.email_datetime(date, @conn.assigns.locale)
+                    _ -> @user_notification.parameters["event_date"]
+                  end
+                Map.put(@user_notification.parameters, "event_date", date)
+              Enum.member?(Map.keys(@user_notification.parameters), "seller_event_date") ->
+                date = 
+                  case Timex.parse(@user_notification.parameters["seller_event_date"], "{ISO:Extended}") do
+                    {:ok, date} -> MoverAppWeb.AdminView.email_datetime(date, @conn.assigns.locale)
+                    _ -> @user_notification.parameters["seller_event_date"]
+                  end
+                Map.put(@user_notification.parameters, "seller_event_date", date)
+              true -> @user_notification.parameters
+            end
+        %>
+        <%= if parameters != nil do
+              raw(Gettext.dgettext(MoverAppWeb.Gettext, "default", @user_notification.content, Keyword.new(parameters, fn {k,v} -> {String.to_existing_atom(k), v} end))) 
+            else
+              raw(@user_notification.content)
+            end
+        %>
+      </p>
+    </div>
+  </div>
+  <div class="btns">
+    <%= if @user_notification.type == "job" do %>
+      <a class="btn primary medium" href={@user_notification.link}><%= gettext "View" %></a>
+    <% end %>
+  </div>
+</div>
+
+  <script>
+  $(document).ready(function(){
+    $(".download-main-calendar-btn").click(function(){
+      $(".download-main-calendar").html($(this).next(".event-calendar-options").html());
+    });
+  });
+
+  function cancelRedirect(link){
+    window.location.href=link;
+  }
+</script>

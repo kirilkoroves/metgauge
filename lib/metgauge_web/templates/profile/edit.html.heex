@@ -1,0 +1,181 @@
+ <div class="profile-form">
+   <h2><%= gettext("Profile") %></h2>
+    <%= form_for @changeset, Routes.admin_profile_path(@conn, :update), [method: "PUT", multipart: true, name: "profile"], fn f -> %>
+    <div class="profile">
+      <div class="forms">
+        <div class="half-col">
+          <div class="full-col">
+            <div class="forms-title"><h6><%= gettext("Personal information") %></h6></div>
+          </div>
+          <div class="full-row">
+            <div class="full-col" style="display: flex; flex-direction: row;">
+              <div class="avatar">
+                <img id="profile-avatar" src={profile_image_url(@conn, @profile)} alt="Profile avatar" class={if @profile == nil or @profile.avatar_path == "" or @profile.avatar_path == nil do "no_profile_img" end}/>
+              </div>
+              <div href="" class="avatar-edit-btns">
+                  <%= file_input f, :avatar_path, style: "display: none" %>
+                  <button type="primary" class="primary" id="upload-avatar"><%= gettext("Upload") %></button>
+                  <button class="secondary" id="remove-image" style={if @profile == nil or @profile.avatar_path == "" or @profile.avatar_path == nil do "display: none" end}><%= gettext("Remove") %></button>
+                  <%= label f, :avatar_path, class: "invalid-feedback" %>
+              </div>
+            </div>
+          </div>
+          <div class="full-row">
+            <div class="half-col">
+                <div class="field-title"><%= gettext("First name") %></div>
+                <%= text_input f, :first_name, class: "form-field", placeholder: gettext("First name"), maxlength: "255" %>
+                <%= label f, :first_name, class: "invalid-feedback" %>
+            </div>
+            <div class="half-col">
+                <div class="field-title"><%= gettext("Last name") %></div>
+                <%= text_input f, :last_name, class: "form-field", placeholder: gettext("Last name"), maxlength: "255" %>
+                <%= label f, :last_name, class: "invalid-feedback" %>
+            </div>
+          </div>
+          <div class="full-row">
+            <div class="full-col">
+                <div class="field-title"><%= gettext("Email") %></div>
+                <%= text_input f, :email, class: "form-field", placeholder: gettext("Email"), maxlength: "255" %>
+                <%= label f, :email, class: "invalid-feedback" %>
+            </div>
+          </div>
+          <div class="full-row">
+            <div class="full-col">
+                <div class="field-title description-title">
+                  <%= gettext("About you") %>
+                </div>
+                <%= textarea f, :about, class: "form-field", placeholder: gettext("About you"), maxlength: "2600", style: "height: 132px" %>
+                <div class="form-field-bottom">
+                  <%= gettext("Maximum 2,600 characters") %>
+                </div>
+                <%= label f, :about, class: "invalid-feedback" %>
+            </div>
+          </div>
+        </div>
+        <div class="half-col">
+          <br/>
+          <br/>
+          <div class="full-row">
+            <div class="full-col">
+              <div class="field-title"><%= gettext("Languages Spoken") %></div>
+              <select name="profile[languages][]" placeholder={gettext("Choose languages")} multiple="multiple" id="profile_languages">
+                <%= for language <- Metgauge.Accounts.Profile.languages() do %>
+                  <%= if Enum.member?(@profile.languages, language.key) do %>
+                    <option selected="selected" value={ language.key }><%= language.value %></option>
+                  <% else %>
+                    <option value={ language.key }><%= language.value %></option>
+                  <% end %>
+                <% end %>
+              </select>
+              <div class="form-field-bottom hidden">
+                <%= gettext("Only visible to yourself") %>
+              </div>
+              <%= label f, :languages, class: "invalid-feedback" %>
+            </div>
+          </div>
+          <div class="full-row">
+            <div class="full-col">
+              <div class="field-title"><%= gettext("Time Zone") %></div>
+              <select name="profile[timezone]" id="profile_timezone" placeholder={gettext "Choose your timezone"}>
+                <option></option>
+                <%= for timezone <- timezone_options() do %>
+                  <%= if @profile.timezone == timezone.key do %>
+                    <option selected="selected" value={ timezone.key }><%= timezone.value %></option>
+                  <% else %>
+                    <option value={ timezone.key }><%= timezone.value %></option>
+                  <% end %>
+                <% end %>
+              </select>
+              <%= label f, :timezone, class: "invalid-feedback" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="update-profile-btns">
+      <button type="button" onclick={"location.href='" <> Routes.admin_path(@conn, :index) <> "'"} class="tertiary" id="cancel-edit" ><%= gettext("Cancel") %></button>
+          <button class="primary" type="button" id="update-profile-btn">
+            <%= gettext "Save" %>
+            <div class="w-6 h-6 animate-spin loading">
+              <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 48 48" fill="none">
+                <path d="M42 24c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6" strokewidth="14" stroke="white">
+                </path>
+              </svg>
+          </div>
+        </button>
+    </div>
+    </div>
+<% end %>
+  </div>
+
+<style>
+  .invalid-feedback, .loading{
+    display: none;
+  }
+  .select2-dropdown.select2-dropdown--below{
+    display: block !important;
+  }
+  .select2-dropdown{
+    border: 1px solid lightgray !important;
+  }
+</style>
+<script defer type="text/javascript" src={Routes.static_path(@conn, "/assets/js/profile.js")}></script>
+<script defer type="text/javascript" src={Routes.static_path(@conn, "/assets/js/draggable-background.js")}></script>
+
+<script>
+  window.profile_languages_placeholder = "<%= gettext "Tell us about your languages" %>";
+  $(document).ready(function(){
+    $(".handle-txt").html($(".handle-input").val());
+
+    $(".handle-input").on('keydown keyup', function(){
+      $(".handle-txt").html($(this).val());
+    });
+
+
+    $('#profile_cover_path').change(function(){
+      $(".remove_image_input").remove();
+      const file = this.files[0];
+      console.log(file);
+      if (file){
+        let reader = new FileReader();
+        reader.onload = function(event){
+          $('#profile-cover').attr('src', event.target.result);
+          $(".cover").css("background", "url('"+event.target.result+"')");
+          $('.cover').backgroundDraggable();
+        }
+        reader.readAsDataURL(file);
+
+      }
+    });
+    $('.cover').backgroundDraggable();
+
+    $(".autopopulate_bio").click(function(){
+      var social_media_links = []
+      $.each(["facebook", "instagram", "linkedin", "youtube", "twitter"], function(id, social_media){
+        if($("#profile_"+social_media).val() != ""){
+          social_media_links.push($("#profile_"+social_media).val());
+        }
+      });
+      if($("#profile_first_name").val() != "" && $("#profile_last_name").val() != "" && social_media_links.length > 0){
+        $(".loading-btn").show();
+        $(".autopopulate_bio").attr("disabled", "disabled");
+        $.ajax({
+          method: "POST",
+          url: "/admin/profile/autogenerate_bio",
+          data: {"name": $("#profile_first_name").val()+ " " + $("#profile_last_name").val(), "social_links": social_media_links, language: $("[name='profile[language]']").val()},
+          headers: { 'x-csrf-token': window.csrfToken },
+          dataType: "json",
+          success: function(response){
+            if(response.status){
+              $("#profile_about").val(response.text.trim());
+            }
+            $(".loading-btn").hide();
+            $(".autopopulate_bio").removeAttr("disabled");
+          } 
+        });
+      }
+      else{
+        alert("<%= gettext "You need to provide name and at least one SNS link to generate." %>");
+      }
+    });
+  });
+</script>

@@ -1,0 +1,146 @@
+.booking-flow-main{
+    flex-wrap: wrap;
+    padding: 2rem;
+  }
+  .info{
+    width: 89%;
+  }
+  .button{
+    width: 10%;
+  }
+  .panel{
+    display: none !important;
+  }
+  .opened .panel{
+    display: flex !important;
+    width: 100%;
+  }
+  .booking-flow-main .right{
+    border: 0px;
+  }
+  .booking-flow-main{
+    min-height: 0px !important;
+  }
+  @media screen and (max-width: 768px){
+    .panel{
+        flex-direction: column;
+    }
+  }
+
+  .select2-dropdown.select2-dropdown--below {
+    display: unset !important;
+  }
+  .select2-dropdown{
+    border: 1px solid lightgray !important;
+  }
+
+  .items-table thead tr th{
+    min-width: 120px;
+  }
+  .items-table tbody tr td{
+    text-align: center;
+  }
+
+  @media screen and (min-width: 769px){
+    .items-table tbody tr td label{
+      text-align: center;
+    }
+  }
+
+  [data-title="Name"]{
+    text-align: left !important;;
+  }
+  
+  td[data-title="Images"]{
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+    }
+  @media screen and (min-width: 768px){
+    td[data-title="Total"]{
+      max-width: 120px;
+      text-align: center !important;
+    }
+
+    td[data-title="Actions"]{
+      max-width: 120px;
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    .total_cube{
+      text-align: right !important;
+      font-size: 16px !important;
+      padding-top: 5px !important;
+      padding-right: 16px;
+    }
+    td[data-title="Actions"]{
+      text-align: right !important;
+    }
+    form h3{
+      padding-top: 3rem;
+    }
+  }
+
+  td[data-title="Total"] label{
+    width: unset;
+  }
+
+  .dropzone {
+    min-height: 0px;
+    border: none;
+    background: #fff;
+    padding: 0px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch !important;
+  }
+
+  .dropzone .dz-preview .dz-image {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100px;
+    max-height: unset;
+    position: relative;
+    display: block;
+    z-index: 10;
+    height: unset;
+  }
+
+
+.dropzone .dz-preview {
+    margin: 0px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+
+.dz-default.dz-message {
+  display: none !important;
+}
+
+.dz-preview{
+  border: 1px solid lightgray;
+  padding: 3px;
+  border-radius: 12px;
+}
+
+.dz-remove{
+  border-radius: 4px;
+  color: rgb(0 78 125);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  outline-style: solid;
+  width: 100%;
+}
+
+.select2-container.select2-container--open{
+  z-index:100000000000;
+}
+
+.select2{
+  width: 100% !important;
+}
+

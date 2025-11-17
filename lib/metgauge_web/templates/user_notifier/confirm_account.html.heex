@@ -1,0 +1,25 @@
+<div class="title">
+    <h2><%= gettext("Confirm your account !") %></h2>
+</div>
+<div class="main-content text-left">
+        <p><%= gettext("Hi %{first_name},", first_name: @user.profile.first_name ) %>
+        <%= gettext("Thank you for signing up Commercial Works! <br> We'd like to confirm that your account was created successfully.")
+        |> raw() %>
+
+        </p>
+        <p>
+            <span class="block pb-[16px]">
+            <%= gettext("To complete the registration click the link below.") %>
+            </span>
+        </p>
+        <p>
+            <a href={@url} target="_blank" class="btn primary large"><%= gettext("Complete the registration") %></a>
+        </p>
+        <p>
+        <%= gettext("If you experience any issues signing into your account, reach out to us at %{link}.",
+        link: "<a href=\"mailto: support@moverapp.com\" class=\"mailtolink\">support@moverapp.com</a>") |> raw() %>
+        </p>
+
+        <%= gettext("<b>Best,<br>The moverapp team</b>") |> raw() %>
+
+</div>

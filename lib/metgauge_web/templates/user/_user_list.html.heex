@@ -1,0 +1,55 @@
+<%= if Enum.count(@page.entries) > 0 do %>
+    <div style="padding-top: 0px; padding-bottom: 1.5rem;">
+        <table style="width: 100%" class="no-more-tables">
+          <thead>
+            <tr>
+               <th><%= gettext "Name" %></th>
+               <th><%= gettext "Email" %></th>
+               <th><%= gettext "Client" %></th>
+               <th><%= gettext "Confirmed" %></th>
+               <th><%= gettext "Status" %></th>
+               <th><%= gettext "Role" %></th>
+               <th><%= gettext "Actions" %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for profile <- @page.entries do %>
+              <tr id={"profile_" <> to_string(profile.id)}>
+                <td data-title={gettext "Name"}><%= profile.first_name <> " " <>profile.last_name %></td>
+                <td data-title={gettext "Email"}><%= profile.user.email %></td>
+                <td data-title={gettext "Client"}><%= if profile.user.client !=nil, do: profile.user.client.name, else: "None" %></td>
+                <td data-title={gettext "Confirmed"}><%= if profile.user.confirmed_at != nil, do: gettext("Yes"), else: gettext("No") %></td>
+                <td data-title={gettext "Status"}><%= if profile.user.deactivated_at != nil, do: gettext("Archived"), else: gettext("Active") %></td>
+                <td data-title={gettext "Role"}><%= if profile.role == "user", do: gettext("User"), else: gettext("Admin") %></td>
+                <td data-title={gettext "Actions"}>
+                  <%= if profile.user.deactivated_at == nil do %>
+                    <a href={Routes.admin_user_path(@conn, :edit, profile.id)} class="btn tertiary">Edit</a>
+                    <%= if profile.user.confirmed_at == nil do %>
+                      <button class="btn primary confirm-btn" style="margin-left: 1rem;" data-id={profile.id}>Confirm</button>
+                    <% end %>
+                    <button class="btn danger-700 delete-btn" style="border: 1px solid red; margin-left: 1rem;" data-id={profile.id}>Archive</button>
+                  <% else %>
+                    <button class="btn btn-success activate-btn" data-id={profile.id}>Activate</button>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <nav class="border-t border-gray-200">
+          <ul class="flex my-2">
+            <li class="">
+              <a class={ if @page.page_number <= 1, do: "px-2 py-2 pagination-link pointer-events-none text-gray-600", else: "px-2 py-2 pagination-link active"} href="#" phx-click="nav" phx-value-page={ @page.page_number - 1 }>Previous</a>
+            </li>
+        <%= for idx <-  Enum.to_list(1..@page.total_pages) do %>
+            <li class="">
+            <a class={ if @page.page_number == idx, do: "px-2 py-2 pagination-link pointer-events-none text-gray-600", else: "px-2 py-2 pagination-link active"} href="#" phx-click="nav" phx-value-page={ idx }><%= idx %></a>
+            </li>
+        <% end %>
+            <li class="">
+              <a class={if @page.page_number >= @page.total_pages, do: "px-2 py-2 pagination-link pointer-events-none text-gray-600", else: "px-2 py-2 pagination-link active"} href="#" phx-click="nav" phx-value-page={ @page.page_number + 1 }>Next</a>
+            </li>
+          </ul>
+        </nav>
+    </div>
+  <% end %>

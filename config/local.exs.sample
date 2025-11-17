@@ -1,0 +1,17 @@
+import Config
+
+config :metgauge, MoverApp.Repo,
+  username: "postgres",
+  password: "postgres",
+  database: "metgauge_dev",
+  hostname: "localhost",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: "GOOGLE CLIENT ID",
+  client_secret: "GOOGLE CLIENT SECRET"
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: "579155513914821",
+  client_secret: "982c9c2ff3d59b166e7f692690eb682b"

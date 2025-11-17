@@ -1,0 +1,510 @@
+{
+  "Audio setting": {
+    "ja": "オーディオ設定",
+    "zh_TW": "音頻設置"
+  },
+  "Camera source": {
+    "ja": "カメラソース",
+    "zh_TW": "影像來源"
+  },
+  "Host": {
+    "ja": "主催者",
+    "zh_TW": "主持人"
+  },
+  "Host:": {
+    "ja": "主催者：",
+    "zh_TW": "主持人："
+  },
+  "Leave": {
+    "ja": "退室",
+    "zh_TW": "離開"
+  },
+  "Microphone source": {
+    "ja": "マイク選択",
+    "zh_TW": "麥克風來源"
+  },
+  "Output level:": {
+    "ja": "出力レベル",
+    "zh_TW": "輸出音量"
+  },
+  "Speaker source": {
+    "ja": "スピーカーソース",
+    "zh_TW": "喇叭來源"
+  },
+  "Test Speaker": {
+    "ja": "スピーカーを確認する",
+    "zh_TW": "確認喇叭"
+  },
+  "Video setting": {
+    "ja": "ビデオ設定",
+    "zh_TW": "視訊設置"
+  },
+  "When join the room:": {
+    "ja": "ビデオチャットに参加する際、映像と音声のデフォルトは",
+    "zh_TW": "開始視訊對話時，影音設定預設為"
+  },
+  "in the room": {
+    "ja": "人が入室済",
+    "zh_TW": "人已經進入"
+  },
+  "Afrikaans": {
+    "ja": "アフリカーンス語",
+    "zh_TW": "南非荷蘭語"
+  },
+  "Albanian": {
+    "ja": "アルバニア語",
+    "zh_TW": "阿爾巴尼亞語"
+  },
+  "Amharic": {
+    "ja": "アムハラ語",
+    "zh_TW": "阿姆哈拉語"
+  },
+  "Arabic": {
+    "ja": "アラビア語",
+    "zh_TW": "阿拉伯語"
+  },
+  "Armenian": {
+    "ja": "アルメニア語",
+    "zh_TW": "亞美尼亞語"
+  },
+  "Australian English (en-AU)": {
+    "ja": "英語(オーストラリア)",
+    "zh_TW": "英語（澳大利亞）"
+  },
+  "Azerbaijani": {
+    "ja": "アゼルバイジャン語",
+    "zh_TW": "阿塞拜疆語"
+  },
+  "Bengali": {
+    "ja": "ベンガル語",
+    "zh_TW": "孟加拉語"
+  },
+  "Bosnian": {
+    "ja": "ボスニア語",
+    "zh_TW": "波斯尼亞語"
+  },
+  "Brazilian Portuguese (pt-BR)": {
+    "ja": "ポルトガル語(ブラジル)",
+    "zh_TW": "葡萄牙語（巴西）"
+  },
+  "British English (en-GB)": {
+    "ja": "英語(イギリス)",
+    "zh_TW": "英語（英國）"
+  },
+  "Bulgarian": {
+    "ja": "ブルガリア語",
+    "zh_TW": "保加利亞語"
+  },
+  "Canadian French": {
+    "ja": "フランス語(カナダ)",
+    "zh_TW": "法語(加拿大)"
+  },
+  "Canadian French (fr-CA)": {
+    "ja": "フランス語(カナダ)",
+    "zh_TW": "法語(加拿大)"
+  },
+  "Catalan": {
+    "ja": "カタロニア語",
+    "zh_TW": "加泰羅尼亞語"
+  },
+  "Chinese": {
+    "ja": "中国語(簡体字)",
+    "zh_TW": "簡體中文"
+  },
+  "Chinese Traditional": {
+    "ja": "中国語(繁体字)",
+    "zh_TW": "繁體中文"
+  },
+  "Croatian": {
+    "ja": "クロアチア語",
+    "zh_TW": "克羅地亞語"
+  },
+  "Czech": {
+    "ja": "チェコ語",
+    "zh_TW": "捷克語"
+  },
+  "Danish": {
+    "ja": "デンマーク語",
+    "zh_TW": "丹麥語"
+  },
+  "Dari": {
+    "ja": "ダリ語",
+    "zh_TW": "達里語"
+  },
+  "Dutch": {
+    "ja": "オランダ語",
+    "zh_TW": "荷蘭語"
+  },
+  "Enable Automatic Language Identification": {
+    "ja": "AI自動言語識別を有効にする",
+    "zh_TW": "開啟AI自動語言辨識"
+  },
+  "Enable Translation": {
+    "ja": "AI翻訳を有効にする",
+    "zh_TW": "開啟AI翻譯"
+  },
+  "End": {
+    "ja": "終了",
+    "zh_TW": "結束"
+  },
+  "English": {
+    "ja": "英語",
+    "zh_TW": "英語"
+  },
+  "Estonian": {
+    "ja": "エストニア語",
+    "zh_TW": "愛沙尼亞語"
+  },
+  "Finnish": {
+    "ja": "フィンランド語",
+    "zh_TW": "芬蘭語"
+  },
+  "French": {
+    "ja": "フランス語",
+    "zh_TW": "法語"
+  },
+  "French (fr-FR)": {
+    "ja": "フランス語（fr-FR）",
+    "zh_TW": "法語（fr-FR）"
+  },
+  "Georgian": {
+    "ja": "ジョージア語",
+    "zh_TW": "格魯吉亞語"
+  },
+  "German": {
+    "ja": "ドイツ語",
+    "zh_TW": "德語"
+  },
+  "German (de-DE)": {
+    "ja": "ドイツ語",
+    "zh_TW": "德語"
+  },
+  "Greek": {
+    "ja": "ギリシャ語",
+    "zh_TW": "希臘語"
+  },
+  "Gujarati": {
+    "ja": "グジャラート語",
+    "zh_TW": "古吉拉特語"
+  },
+  "Haitian Creole": {
+    "ja": "クレオール語(ハイチ)",
+    "zh_TW": "海地克里奧爾語"
+  },
+  "Hausa": {
+    "ja": "ハウサ語",
+    "zh_TW": "豪薩語"
+  },
+  "Hebrew": {
+    "ja": "ヘブライ語",
+    "zh_TW": "希伯來語"
+  },
+  "Hindi": {
+    "ja": "ヒンディー語",
+    "zh_TW": "印地語"
+  },
+  "Hungarian": {
+    "ja": "ハンガリー語",
+    "zh_TW": "匈牙利語"
+  },
+  "Icelandic": {
+    "ja": "アイスランド語",
+    "zh_TW": "冰島語"
+  },
+  "Indonesian": {
+    "ja": "インドネシア語",
+    "zh_TW": "印度尼西亞語"
+  },
+  "Irish": {
+    "ja": "アイルランド語",
+    "zh_TW": "愛爾蘭語"
+  },
+  "Italian": {
+    "ja": "イタリア語",
+    "zh_TW": "意大利語"
+  },
+  "Italian (it-IT)": {
+    "ja": "イタリア語（it-it）",
+    "zh_TW": "意大利語"
+  },
+  "Japanese": {
+    "ja": "日本語",
+    "zh_TW": "日語"
+  },
+  "Japanese (ja-JP)": {
+    "ja": "日本語",
+    "zh_TW": "日語"
+  },
+  "Join the room": {
+    "ja": "ビデオチャットに参加する",
+    "zh_TW": "參加視頻"
+  },
+  "Kannada": {
+    "ja": "カンナダ語",
+    "zh_TW": "卡納達語"
+  },
+  "Kazakh": {
+    "ja": "カザフ語",
+    "zh_TW": "哈薩克語"
+  },
+  "Korean": {
+    "ja": "韓国語",
+    "zh_TW": "韓語"
+  },
+  "Korean (ko-KR)": {
+    "ja": "韓国語",
+    "zh_TW": "韓語"
+  },
+  "Language you speak": {
+    "ja": "あなたが話す言語",
+    "zh_TW": "你說的語言"
+  },
+  "Latvian": {
+    "ja": "ラトビアン語",
+    "zh_TW": "拉脫維亞語"
+  },
+  "Let's get your set up": {
+    "ja": "セットアップしましょう",
+    "zh_TW": "開始進行設置"
+  },
+  "Lithuanian": {
+    "ja": "リトアニアン語",
+    "zh_TW": "立陶宛語"
+  },
+  "Macedonian": {
+    "ja": "マケドニア語",
+    "zh_TW": "馬其頓語"
+  },
+  "Malay": {
+    "ja": "マレー語",
+    "zh_TW": "馬來語"
+  },
+  "Malayalam": {
+    "ja": "マラヤーラム語",
+    "zh_TW": "馬拉雅拉姆語"
+  },
+  "Maltese": {
+    "ja": "マルタ語",
+    "zh_TW": "馬耳他語"
+  },
+  "Mandarin Chinese - Mainland (zh-CN)": {
+    "ja": "中国語",
+    "zh_TW": "中文"
+  },
+  "Marathi": {
+    "ja": "マラーティー語",
+    "zh_TW": "馬拉地語"
+  },
+  "Mexican Spanish": {
+    "ja": "スペイン語(メキシコ)",
+    "zh_TW": "西班牙語(墨西哥)"
+  },
+  "Mongolian": {
+    "ja": "モンゴル語",
+    "zh_TW": "蒙古語"
+  },
+  "Norwegian": {
+    "ja": "ノルウェー語",
+    "zh_TW": "挪威語"
+  },
+  "Pashto": {
+    "ja": "パシュトー語",
+    "zh_TW": "普什圖語"
+  },
+  "Persian": {
+    "ja": "ペルシャ語",
+    "zh_TW": "波斯語"
+  },
+  "Polish": {
+    "ja": "ポーランド語",
+    "zh_TW": "波蘭語"
+  },
+  "Portugal Portuguese": {
+    "ja": "ポルトガル語(ポルトガル)",
+    "zh_TW": "葡萄牙語(葡萄牙)"
+  },
+  "Portuguese": {
+    "ja": "ポルトガル語",
+    "zh_TW": "葡萄牙語"
+  },
+  "Punjabi": {
+    "ja": "パンジャブ語",
+    "zh_TW": "旁遮普語"
+  },
+  "Romanian": {
+    "ja": "ルーマニア語",
+    "zh_TW": "羅馬尼亞語"
+  },
+  "Russian": {
+    "ja": "ロシア語",
+    "zh_TW": "俄語"
+  },
+  "Language for translation": {
+    "ja": "翻訳する言語を選択",
+    "zh_TW": "選擇翻譯後的語言"
+  },
+  "Select language for translation": {
+    "ja": "翻訳する言語を選択",
+    "zh_TW": "選擇翻譯後的語言"
+  },
+  "Serbian": {
+    "ja": "セルビア語",
+    "zh_TW": "塞爾維亞語"
+  },
+  "Sinhala": {
+    "ja": "シンハラ語",
+    "zh_TW": "僧伽羅語"
+  },
+  "Slovak": {
+    "ja": "スロバキア語",
+    "zh_TW": "斯洛伐克語"
+  },
+  "Slovenian": {
+    "ja": "スロベニア語",
+    "zh_TW": "斯洛文尼亞語"
+  },
+  "Somali": {
+    "ja": "ソマリ語",
+    "zh_TW": "索馬里語"
+  },
+  "Spanish": {
+    "ja": "スペイン語",
+    "zh_TW": "西班牙語"
+  },
+  "Swahili": {
+    "ja": "スワヒリ語",
+    "zh_TW": "斯瓦希里語"
+  },
+  "Swedish": {
+    "ja": "スウェーデン語",
+    "zh_TW": "瑞典語"
+  },
+  "Tagalog": {
+    "ja": "タガログ語",
+    "zh_TW": "他加祿語"
+  },
+  "Tamil": {
+    "ja": "タミル語",
+    "zh_TW": "泰米爾語"
+  },
+  "Telugu": {
+    "ja": "テルグ語",
+    "zh_TW": "泰盧固語"
+  },
+  "Thai": {
+    "ja": "タイ語",
+    "zh_TW": "泰語"
+  },
+  "There was an issue joining that meeting. Check your connectivity and try again.": {
+    "ja": "ビデオチャットに参加することが出来ません。接続を確認して、もう一度やり直してください。",
+    "zh_TW": "無法加入視訊。請檢查你的網路訊號後再試一次。"
+  },
+  "Turkish": {
+    "ja": "トルコ語",
+    "zh_TW": "土耳其語"
+  },
+  "US English (en-US)": {
+    "ja": "英語（アメリカ）",
+    "zh_TW": "英語(美國)"
+  },
+  "US Spanish (es-US)": {
+    "ja": "スペイン語（アメリカ）",
+    "zh_TW": "西班牙語(美國)"
+  },
+  "Ukrainian": {
+    "ja": "ウクライナ語",
+    "zh_TW": "烏克蘭語"
+  },
+  "Unable to join meeting": {
+    "ja": "ビデオチャットに参加できません",
+    "zh_TW": "無法加入視頻"
+  },
+  "Urdu": {
+    "ja": "ウルドゥー語",
+    "zh_TW": "烏爾都語"
+  },
+  "Uzbek": {
+    "ja": "ウズベック語",
+    "zh_TW": "烏茲別克語"
+  },
+  "Vietnamese": {
+    "ja": "ベトナム語",
+    "zh_TW": "越語"
+  },
+  "Welsh": {
+    "ja": "ウェールズ語",
+    "zh_TW": "威爾士語"
+  },
+  "people": {
+    "ja": "人",
+    "zh_TW": "人"
+  },
+  "Emojify": {
+    "ja": "絵文字",
+    "zh_TW": "表情符號"
+  },
+  "CircularCut": {
+    "ja": "円形カット",
+    "zh_TW": "圓形視窗"
+  },
+  "NoOp": {
+    "ja": "無操作",
+    "zh_TW": "無操作"
+  },
+  "Segmentation": {
+    "ja": "変色",
+    "zh_TW": "變色"
+  },
+  "Resize (9/16)": {
+    "ja": "リサイズ(9/16)",
+    "zh_TW": "調整尺寸(9/16)"
+  },
+  "Background Blur 10% CPU": {
+    "ja": "背景ぼかす(10%)",
+    "zh_TW": "模糊背景(10%)"
+  },
+  "Background Blur 20% CPU": {
+    "ja": "背景ぼかす(20%)",
+    "zh_TW": "模糊背景(20%)"
+  },
+  "Background Blur 30% CPU": {
+    "ja": "背景ぼかす(30%)",
+    "zh_TW": "模糊背景(30%)"
+  },
+  "Background Blur 40% CPU": {
+    "ja": "背景ぼかす(40%)",
+    "zh_TW": "模糊背景(40%)"
+  },
+  "Background Replacement": {
+    "ja": "背景変更",
+    "zh_TW": "背景更換"
+  },
+  "None": {
+    "ja": "エフェクト無し",
+    "zh_TW": "無效果"
+  },
+  "Are you sure you want to end the meeting for everyone?": {
+    "ja": "ビデオチャットを終了しますか？",
+    "zh_TW": "確定結束視頻嗎?"
+  },
+  "person": {
+    "ja": "人",
+    "zh_TW": "人"
+  },
+  "Live Transcription Configuration": {
+    "ja":"AIリアルタイム翻訳機能", 
+    "zh_TW":"AI即時翻譯功能"
+  },
+  "Live Transcription": {
+    "ja":"AIリアルタイム翻訳機能", 
+    "zh_TW":"AI即時翻譯功能"
+  },
+  "Your meeting will end in 5 minutes": {
+    "ja": "このビデオチャットは 5 分後に終了します",
+    "zh_Tw": "本視頻將於五分鐘後結束"
+  },
+  "Videochat does not work in the in-app browser. Please use another mobile browser (Chrome, Firefox, Safari, ...) to continue.": {
+    "ja": "ビデオチャットスはアプリ内ブラウザでは機能しません。 続行するには、別のモバイル ブラウザ (Chrome、Firefox、Safari など) を使用してください。",
+    "zh_TW": "視訊會議在應用程序內的瀏覽器中不能使用。 請使用其他瀏覽器（如Chrome、Firefox、Safari 等）繼續。"
+  }
+}

@@ -94,3 +94,12 @@ config :metgauge, percentage_from_seller: 10, percentage_from_buyer: 5, price_cr
 config :metgauge, courses_server_url: "https://thproduction.blob.core.windows.net/$web/"
 
 config :porcelain, driver: Porcelain.Driver.Basic
+
+config :metgauge, 
+  mqtt_host: 'test.mosquitto.org',
+  mqtt_port: 1883,
+  mqtt_client_id: "metgauge",
+  mqtt_clean_start: true,
+  mqtt_timespan: 60
+
+config :metgauge, :interval, 1000

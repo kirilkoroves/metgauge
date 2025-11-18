@@ -18,26 +18,39 @@ defmodule Metgauge.Accounts.UserNotifier do
   @doc """
   Deliver instructions to confirm account.
   """
-  def deliver_confirmation_instructions(conn, user, url) do
-    user = Metgauge.Repo.preload(user, :profile)
-    send_confirm_account("""
+  def deliver_confirmation_instructions(conn, user, sent_user, status) do
+    text = 
+      case status do
+        :admin ->
+          """
+          ==============================
 
-    ==============================
+          #{gettext("The user %{first_name} %{last_name} (%{email}) has registered on MetGauge.", first_name: user.profile.first_name, last_name: user.profile.last_name, email: user.email)},
 
-    #{gettext("Hi %{first_name}", first_name: user.profile.first_name)},
+          #{gettext("As administrator for the client %{name} please confirm the user and check their role.", name: user.client.name)}
 
-    #{gettext("Thank you for signing up Commercial Works App !")}
+          #{gettext("If you experience any issues, reach out to us at support@metgauge.com.")}
 
-    #{gettext("We'd like to confirm that your account was created successfully. To complete the registration click the link below.")}
+          #{gettext("Best, The MetGauge team")}
 
-    <a href="#{url}">#{gettext("Complete the registration")}</a>
+          ==============================
+        """
+        :superadmin ->
+          """
+          ==============================
 
-    #{gettext("If you experience any issues signing into your account, reach out to us at support@metgauge.com.")}
+          #{gettext("The user %{first_name} %{last_name} (%{email}) has registered on MetGauge.", first_name: user.profile.first_name, last_name: user.profile.last_name, email: user.email)},
 
-    #{gettext("Best, The Commercial Works App team")}
+          #{gettext("Because the client %{name} does not have an assigned administrator, please confirm the user and check their role.", name: user.client.name)}
 
-    ==============================
-    """, user, url, conn)
+          #{gettext("If you experience any issues, reach out to us at support@metgauge.com.")}
+
+          #{gettext("Best, The MetGauge team")}
+
+          ==============================
+          """
+      end
+    send_confirm_account(text, user, sent_user, status, conn)
   end
 
   @doc """
@@ -91,7 +104,7 @@ defmodule Metgauge.Accounts.UserNotifier do
 
     #{gettext("Hi %{first_name}", first_name: profile.first_name)},
 
-    #{gettext("We are thrilled to have you join metgauge !")}
+    #{gettext("We are thrilled to have you join MetGauge !")}
 
     #{gettext("Account ID:")} #{user.email}
 
@@ -133,14 +146,14 @@ defmodule Metgauge.Accounts.UserNotifier do
     |> deliver_html()
   end
 
-  def send_confirm_account(body, user, url, conn) do
+  def send_confirm_account(body, user, sent_user, status, conn) do
     new()
     |> from({"MetGauge", @support_email})
-    |> to(user.email)
+    |> to(sent_user.email)
     |> subject(gettext("Action required: Confirm registration on MetGauge"))
     |>
     text_body(body)
-    |> render_body("confirm_account.html", %{user: user, url: url, conn: conn})
+    |> render_body("confirm_account.html", %{user: user, status: status, conn: conn})
     |> deliver_html()
   end
 

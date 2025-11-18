@@ -1,14 +1,15 @@
 defmodule MetgaugeWeb.UserController do
   use MetgaugeWeb, :controller
-  alias Metgauge.Accounts.{User, Profile, Client}
+  alias Metgauge.Accounts.{User, Profile, Client, UserNotifier}
   alias Metgauge.Helpers.ChangesetHelpers
-  alias Metgauge.Helpers.AzureHelpers
   
   alias Metgauge.Repo
 
   import Ecto.Query
   @page_size 25
 
+  plug MetgaugeWeb.Plugs.AdminFeaturesAccess
+  
   def index(conn, params) do
     page = Map.get(params, "page", 1)
     status = Map.get(params, "status", "active")
@@ -26,11 +27,23 @@ defmodule MetgaugeWeb.UserController do
         from [p, u, c] in query, where: not is_nil(u.deactivated_at)
       end
 
+    query = 
+      if conn.assigns.profile.role == "superadmin" do
+        query
+      else
+        from [p, u, c] in query, where: u.client_id == ^conn.assigns.current_user.client_id
+      end
+
     render conn, "index.html", page: Repo.paginate(query, page: page, page_size: @page_size), search_term: Map.get(params, "search_term", ""), status: status
   end
 
   def edit(conn, %{"id" => id} = _params) do
-    profile = Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id)
+    profile = 
+      if conn.assigns.profile.role == "superadmin" do
+        Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id)
+      else
+        Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id and u.client_id == ^conn.assigns.current_user.client_id)
+      end
     case profile do
       nil -> conn |> redirect(to: Routes.admin_user_path(conn, :index))
       profile ->
@@ -50,7 +63,12 @@ defmodule MetgaugeWeb.UserController do
   end
 
   def toggle_deactivate(conn, %{"id" => id} = _params) do
-    profile = Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id)
+    profile = 
+      if conn.assigns.profile.role == "superadmin" do
+        Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id)
+      else
+        Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id and u.client_id == ^conn.assigns.current_user.client_id)
+      end
     changeset = User.toggle_deactivated_changeset(profile.user)
     case Repo.update(changeset) do
       {:error, _} -> 
@@ -61,12 +79,18 @@ defmodule MetgaugeWeb.UserController do
   end
 
   def confirm(conn, %{"id" => id} = _params) do
-    profile = Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id)
+    profile = 
+      if conn.assigns.profile.role == "superadmin" do
+        Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id)
+      else
+        Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id and u.client_id == ^conn.assigns.current_user.client_id)
+      end
     changeset = User.confirm_changeset(profile.user)
     case Repo.update(changeset) do
       {:error, _} -> 
         json conn, %{status: false, message: "Can not confirm user."}
-      {:ok, _user} ->
+      {:ok, user} ->
+        UserNotifier.deliver_welcome_email(conn, user)
         json conn, %{success: true}
     end
   end
@@ -76,9 +100,9 @@ defmodule MetgaugeWeb.UserController do
     status = Map.get(params, "status", "active")
     query = 
       if Map.get(params, "search_term") != nil do
-        from p in Profile, join: u in assoc(p, :user), where: ilike(p.first_name, ^"%#{Map.get(params, "search_term")}%") or ilike(p.last_name, ^"%#{Map.get(params, "search_term")}%") or ilike(u.email, ^"%#{Map.get(params, "search_term")}%"), order_by: [desc: u.inserted_at], preload: [user: u]
+        from p in Profile, join: u in assoc(p, :user), left_join: c in Client, on: c.id == u.client_id, where: ilike(p.first_name, ^"%#{Map.get(params, "search_term")}%") or ilike(p.last_name, ^"%#{Map.get(params, "search_term")}%") or ilike(u.email, ^"%#{Map.get(params, "search_term")}%"), order_by: [desc: u.inserted_at], preload: [user: {u, client:  c}]
       else
-        from p in Profile, join: u in assoc(p, :user), order_by: [desc: u.inserted_at], preload: [user: u]
+        from p in Profile, join: u in assoc(p, :user), left_join: c in Client, on: c.id == u.client_id, order_by: [desc: u.inserted_at], preload: [user: {u, client: c}]
       end
 
     query = 
@@ -88,13 +112,26 @@ defmodule MetgaugeWeb.UserController do
         from [p, u] in query, where: not is_nil(u.deactivated_at)
       end
 
+    query = 
+      if conn.assigns.profile.role == "superadmin" do
+        query
+      else
+        from [p, u, c] in query, where: u.client_id == ^conn.assigns.current_user.client_id
+      end
+
     conn
     |> put_root_layout(false)
     |> render("_user_list.html", page: Repo.paginate(query, page: page, page_size: @page_size))
   end
 
   def update(conn, %{"id" => id, "profile" => params}) do
-    profile = Repo.one(from p in Profile, where: p.id == ^id, preload: [:user])
+    profile = 
+      if conn.assigns.profile.role == "superadmin" do
+        Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id)
+      else
+        Repo.one(from p in Profile, join: u in assoc(p, :user), preload: [user: u], where: p.id == ^id and u.client_id == ^conn.assigns.current_user.client_id)
+      end
+
     with \
         {:ok, %{user: _user}} <- update_user(profile, params)
     do

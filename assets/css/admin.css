@@ -31,7 +31,7 @@ body.admin {
 }
 
 .admin .topbar .logo {
-    @apply bg-transparent lg:hidden block py-5;
+    @apply bg-white lg:hidden block py-5;
     height: 72px;
 }
 
@@ -3707,4 +3707,9 @@ input[type="text"]:focus, textarea.form-field:focus{
 .actions-section{
     display: flex;
     gap: 1rem;
+}
+
+.copy-text{
+    padding: 8px;
+    margin-left: 8px;
 }

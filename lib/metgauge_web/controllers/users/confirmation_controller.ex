@@ -2,35 +2,59 @@ defmodule MetgaugeWeb.Users.ConfirmationController do
   use MetgaugeWeb, :controller
 
   alias Metgauge.Accounts
-  alias Metgauge.Accounts.UserNotifier
+  alias Metgauge.Accounts.{User, UserNotifier}
   alias MetgaugeWeb.UserAuth
+  import Ecto.Query
+  alias Metgauge.Repo
 
   def new(conn, _params) do
     render(conn, "new.html")
   end
 
   def resend_confirmation(conn, _params) do
-      Accounts.deliver_user_confirmation_instructions(
-        conn,
-        conn.assigns.current_user,
-        &Routes.user_confirmation_url(conn, :edit, &1)
+    user = Repo.preload(conn.assigns.current_user, [:client, :profile])
+    {status, sent_user} = 
+      if user.client_id != nil do
+        case Repo.one(from u in User, join: p in assoc(u, :profile), where: u.client_id == ^user.client_id and p.role == ^"admin", limit: 1) do
+          nil -> {:superadmin, Repo.one(from u in User, join: p in assoc(u, :profile), where: p.role == ^"superadmin", limit: 1)}
+          user -> {:admin, user}
+        end
+      else
+        {:superadmin, Repo.one(from u in User, join: p in assoc(u, :profile), where: p.role == ^"superadmin", limit: 1)}
+      end
+      Accounts.deliver_user_confirmation_instructions(conn,
+        user,
+        sent_user,
+        status
       )
     conn
     |> put_flash(
       :info,
       gettext(
-        "Please check your email for the confirmation"
+        "Confirmation request was sent to the administrator"
       )
     )
     |> redirect(to: "/")
   end
 
   def create(conn, %{"user" => %{"email" => email}}) do
-    if user = Accounts.get_user_by_email(email) do
-      Accounts.deliver_user_confirmation_instructions(conn,
-        user,
-        &Routes.user_confirmation_url(conn, :edit, &1)
-      )
+    user = Accounts.get_user_by_email(email)
+    if user != nil do
+      user = Repo.preload(conn.assigns.current_user, [:client, :profile])
+      {status, sent_user} = 
+        if user.client_id != nil do
+          case Repo.one(from u in User, join: p in assoc(u, :profile), where: u.client_id == ^user.client_id and p.role == ^"admin", limit: 1) do
+            nil -> {:superadmin, Repo.one(from u in User, join: p in assoc(u, :profile), where: p.role == ^"superadmin", limit: 1)}
+            user -> {:admin, user}
+          end
+        else
+          {:superadmin, Repo.one(from u in User, join: p in assoc(u, :profile), where: p.role == ^"superadmin", limit: 1)}
+        end
+        Accounts.deliver_user_confirmation_instructions(conn,
+          user,
+          sent_user,
+          status
+        )
     end
 
     conn
@@ -41,11 +65,6 @@ defmodule MetgaugeWeb.Users.ConfirmationController do
       )
     )
     |> redirect(to: "/")
-  end
-
-  def edit(conn, %{"token" => token}) do
-    #render(conn, "edit.html", token: token)
-    update(conn, %{"token" => token})
   end
 
   # Do not log in the user after confirmation to avoid a

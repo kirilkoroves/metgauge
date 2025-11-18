@@ -1,0 +1,119 @@
+<h2 class="grow shrink-0" >
+  <%= gettext("Dashboard") %>
+</h2>
+
+<div class="admin-home-wrapper">
+  <div class="main">
+    <div class="admin-section">
+      <div>
+        <h3>Temperature Diagram</h3>
+        <%= if @plot do %>
+          <%= @plot %>
+        <% end %>
+      </div>
+      <div class="tableWrap">
+        <table class="temperatures">
+          <thead>
+            <tr>
+              <th style="color: white">Time</th>
+              <th style="color: white">Temperature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for {xs, val} <- Enum.reverse(@reports) do %>
+              <tr>
+                <td><%= Calendar.strftime(xs, "%H:%M:%S") %></td>
+                <td><%= val %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="admin-section">
+        <div>
+          <h3>Measurement Status Diagram</h3>
+          <%= if @plot_vertical do %>
+            <%= raw @plot_vertical %>
+          <% end %>
+        </div>
+        <div>
+          <h3>Points Diagram</h3>
+          <%= raw @points_img %>
+        </div>
+    </div>
+    <div class="admin-section">
+      <div class="statuses-container">
+        <div>
+          <h3>Temperature Status</h3>
+          <svg height="100" width="100" xmlns="http://www.w3.org/2000/svg">
+            <circle r="45" cx="50" cy="50" fill={@temperature_status} stroke="none" />
+          </svg>
+        </div>
+        <div>
+          <h3>Hazard Level Status</h3>
+          <svg height="100" width="100" xmlns="http://www.w3.org/2000/svg">
+            <circle r="45" cx="50" cy="50" fill={@hazard_status} stroke="none" />
+          </svg>
+        </div>
+        <div>
+          <h3>Light Status</h3>
+          <svg height="100" width="100" xmlns="http://www.w3.org/2000/svg">
+            <circle r="45" cx="50" cy="50" fill={@light_status} stroke="none" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <form phx-submit="set-interval">
+    <label for="interval">Interval</label>
+    <input type="text" name="interval" value={@interval}/>
+    <input type="submit" value="Set interval"/>
+  </form>
+</div>
+
+<style>
+  .tableWrap {
+    height: 217px;
+    overflow: auto;
+  }
+
+  thead tr th {
+    position: sticky;
+    top: 0;
+  }
+  .admin-home-wrapper .main{
+    flex-direction: column;
+  }
+  .admin-section{
+    flex-direction: row !important;
+    div{
+      flex: 1;
+    }
+  }
+
+  .temperatures{
+    width: 100%; 
+    border: 1px solid black;
+    td, th{
+      border: 1px solid black;
+    }
+  }
+
+  .statuses-container{
+    display: flex;
+    flex-direction: row;
+    div{
+      justify-items: center;
+      display: grid;
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    .admin-section{
+      flex-direction: column !important;
+    }
+  }
+</style>

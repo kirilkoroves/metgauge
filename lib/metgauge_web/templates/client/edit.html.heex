@@ -1,6 +1,14 @@
 <div class="admin-home-wrapper">
     <div class="booking-flow-main steps first-section">
       <%= render "_form.html", Map.put(assigns, :title, gettext("Edit Client")) %>
+      <div style="display: flex; flex-direction: row;">
+        <div class="right slot-widget-div" style="width: 100%">
+          <div>
+            <h5>Registration URL</h5>
+            <p><span><%= Routes.user_registration_url(@conn, :new, @client.slug) %></span><button class="copy-text btn small tertiary">Copy</button></p>
+          </div>
+        </div>
+      </div>
     </div>
 </div>
 

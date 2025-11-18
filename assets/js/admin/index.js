@@ -178,6 +178,18 @@ $(function(){
         }
 
     });
+
+    $(document).ready(function(){
+      $(".copy-text").click(function(){
+        var text=$(this).parent().find("span").text();
+        var el=$(this);
+        navigator.clipboard.writeText(text);
+        $(el).html("Copied!");
+        setTimeout(function(){
+          $(el).html("Copy");
+        }, 5000);
+      });
+    });
 })
 
 

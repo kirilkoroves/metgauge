@@ -1,25 +1,31 @@
 <div class="title">
-    <h2><%= gettext("Confirm your account !") %></h2>
+    <h2><%= gettext("Confirm user !") %></h2>
 </div>
 <div class="main-content text-left">
-        <p><%= gettext("Hi %{first_name},", first_name: @user.profile.first_name ) %>
-        <%= gettext("Thank you for signing up Commercial Works! <br> We'd like to confirm that your account was created successfully.")
-        |> raw() %>
-
-        </p>
+    <p><%= gettext("The user %{first_name} %{last_name} (%{email}) has registered on MetGauge.", first_name: @user.profile.first_name, last_name: @user.profile.last_name, email: @user.email) %>
+    </p>
+    <%= if @status == :admin do %>
         <p>
             <span class="block pb-[16px]">
-            <%= gettext("To complete the registration click the link below.") %>
+            <%= gettext("As administrator for the client %{name} please confirm the user and check their role.", name: @user.client.name) %>
             </span>
         </p>
         <p>
-            <a href={@url} target="_blank" class="btn primary large"><%= gettext("Complete the registration") %></a>
+            <a href={MetgaugeWeb.Router.Helpers.admin_user_url(MetgaugeWeb.Endpoint, :index)} target="_blank" class="btn primary large"><%= gettext("View users") %></a>
+        </p>
+    <% else %>
+        <p>
+            <span class="block pb-[16px]">
+            <%= gettext("Because the client %{name} does not have an assigned administrator, please confirm the user and check their role.", name: @user.client.name) %>
+            </span>
         </p>
         <p>
-        <%= gettext("If you experience any issues signing into your account, reach out to us at %{link}.",
-        link: "<a href=\"mailto: support@moverapp.com\" class=\"mailtolink\">support@moverapp.com</a>") |> raw() %>
+            <a href={MetgaugeWeb.Router.Helpers.admin_user_url(MetgaugeWeb.Endpoint, :index)} target="_blank" class="btn primary large"><%= gettext("View users") %></a>
         </p>
+    <% end %>
 
-        <%= gettext("<b>Best,<br>The moverapp team</b>") |> raw() %>
-
+    <p>
+    <%= gettext("If you experience any issues signing into your account, reach out to us at %{link}.",
+    link: "<a href=\"mailto: support@metgauge.com\" class=\"mailtolink\">support@metgauge.com</a>") |> raw() %>
+    </p>
 </div>

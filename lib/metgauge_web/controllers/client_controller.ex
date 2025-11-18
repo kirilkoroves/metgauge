@@ -7,6 +7,28 @@ defmodule MetgaugeWeb.ClientController do
   import Ecto.Query
   @page_size 25
 
+  plug MetgaugeWeb.Plugs.AdminFeaturesAccess
+  plug :check_if_superadmin when action in [:index, :new, :create, :delete, :create_client]
+
+  defp check_if_superadmin(conn, _opts) do
+    cond do
+      conn.assigns.profile.role == "superadmin" -> 
+        conn
+      true ->
+        conn = 
+          if Map.get(conn.params, "success") != nil do
+            conn 
+            |> put_flash(:info, gettext "Successfully saved your changes")
+          else
+            conn 
+            |> put_flash(:error, gettext "You are not authorize to view client data")
+          end
+        conn
+        |> redirect(to: Routes.admin_path(conn, :index))
+        |> halt()
+    end
+  end
+
   def index(conn, params) do
     page = Map.get(params, "page", 1)
     query = 
@@ -40,18 +62,26 @@ defmodule MetgaugeWeb.ClientController do
   end
 
   def edit(conn, %{"id" => id} = _params) do
-    case Repo.one(from mi in Client, where: mi.id == ^id and is_nil(mi.deleted_at)) do
-      nil -> conn |> redirect(to: Routes.admin_client_path(conn, :index))
-      client ->
-        changeset = Client.changeset(client, %{})
-        render conn, "edit.html", client: client, changeset: changeset, form_url: Routes.admin_client_path(conn, :update, id)
+    IO.inspect(id)
+    IO.inspect(conn.assigns.current_user.client_id)
+    if (to_string(id) == to_string(conn.assigns.current_user.client_id)) or conn.assigns.profile.role == "superadmin" do
+      case Repo.one(from mi in Client, where: mi.id == ^id and is_nil(mi.deleted_at)) do
+        nil -> conn |> redirect(to: Routes.admin_client_path(conn, :index))
+        client ->
+          changeset = Client.changeset(client, %{})
+          render conn, "edit.html", client: client, changeset: changeset, form_url: Routes.admin_client_path(conn, :update, id)
+      end
+    else
+      conn 
+      |> put_flash(:error, gettext "You are not authorize to view client data")
+      |> redirect(to: Routes.admin_path(conn, :index))
     end
   end
 
   def delete(conn, %{"id" => id} = _params) do
     case Repo.one(from mi in Client, where: mi.id == ^id and is_nil(mi.deleted_at)) do
       nil -> 
-        json conn, %{status: false, message: "Can not delete move item."}
+        json conn, %{status: false, message: "Can not delete client."}
       client ->
         changeset = Client.changeset(client, %{deleted_at: Timex.now()})
         case Repo.update(changeset) do

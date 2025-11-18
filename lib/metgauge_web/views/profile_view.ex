@@ -2,7 +2,6 @@ defmodule MetgaugeWeb.ProfileView do
   use MetgaugeWeb, :view
   import MetgaugeWeb.Helpers.{OptionHelpers}
   alias Metgauge.Accounts.Profile
-  alias Metgauge.Helpers.AzureHelpers
 
   def languages() do
     Profile.languages()

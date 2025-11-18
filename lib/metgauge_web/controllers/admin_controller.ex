@@ -4,16 +4,37 @@ defmodule MetgaugeWeb.AdminController do
   alias Metgauge.{Accounts.Client, Accounts.User}
   alias Metgauge.Repo
   alias Metgauge.Accounts.UserNotification
+  import Phoenix.LiveView.Controller
 
-  def index(conn, _params) do
+  def index(%{assigns: %{profile: %{role: role}}} = conn, _params) when role in ["superadmin", "admin"] do
     today_str = Timex.now() |> Timex.format!("%m/%d/%Y", :strftime)
     today = Timex.now() |> Timex.to_date()
-    render conn, "index.html", report_data: report_data(today, today), from: today_str, to: today_str
+    render conn, "index.html", report_data: report_data(conn, today, today), from: today_str, to: today_str
   end
 
-  def report_data(start_date, end_date) do
-    clients = Repo.one(from c in Client, where: is_nil(c.deleted_at) and fragment("CAST(inserted_at AS DATE) BETWEEN ? AND ?", ^start_date, ^end_date), select: count(c.id))
-    users = Repo.all(from u in User, where: is_nil(u.deactivated_at) and not is_nil(u.client_id) and fragment("CAST(inserted_at AS DATE) BETWEEN ? AND ?", ^start_date, ^end_date), preload: :client)
+  def index(conn, _params) do
+    live_render(conn, MetgaugeWeb.DashboardLive.Index,
+      session: %{"user" => Repo.preload(conn.assigns.current_user, :client), "profile" => conn.assigns.profile},
+      router: MetgaugeWeb.Router
+    )
+  end
+
+  def report_data(conn, start_date, end_date) do
+    clients = 
+      if conn.assigns.profile.role == "superadmin" do
+        Repo.one(from c in Client, where: is_nil(c.deleted_at) and fragment("CAST(inserted_at AS DATE) BETWEEN ? AND ?", ^start_date, ^end_date), select: count(c.id))
+      else
+        Repo.one(from c in Client, where: is_nil(c.deleted_at) and c.id == ^conn.assigns.current_user.client_id and fragment("CAST(inserted_at AS DATE) BETWEEN ? AND ?", ^start_date, ^end_date), select: count(c.id))
+      end
+
+    users = 
+      if conn.assigns.profile.role == "superadmin" do
+        Repo.all(from u in User, where: is_nil(u.deactivated_at) and not is_nil(u.client_id) and fragment("CAST(inserted_at AS DATE) BETWEEN ? AND ?", ^start_date, ^end_date), preload: :client)
+      else
+        Repo.all(from u in User, where: is_nil(u.deactivated_at) and not is_nil(u.client_id) and u.client_id == ^conn.assigns.current_user.client_id and fragment("CAST(inserted_at AS DATE) BETWEEN ? AND ?", ^start_date, ^end_date), preload: :client)
+      end
+
+    
     count_by_clients = 
       Enum.group_by(users, (&(&1.client_id)))
       |> Enum.map(fn {_client_id, users} ->
@@ -27,7 +48,7 @@ defmodule MetgaugeWeb.AdminController do
   def report_widget(conn, %{"from" => from_date, "to" => to_date}) do
     start_date = Timex.parse!(from_date, "%m/%d/%Y", :strftime) |> Timex.to_date()
     end_date = Timex.parse!(to_date, "%m/%d/%Y", :strftime) |> Timex.to_date()
-    report_data = report_data(start_date, end_date)
+    report_data = report_data(conn, start_date, end_date)
     conn
     |> put_root_layout(false)
     |> render("_report_widget.html", conn: conn, report_data: report_data)

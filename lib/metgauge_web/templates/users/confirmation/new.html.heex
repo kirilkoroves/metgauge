@@ -1,18 +1,26 @@
-<h1>Resend confirmation instructions</h1>
-
-<.form let={f} for={:user} action={Routes.user_confirmation_path(@conn, :create)}>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-
-  <div>
-    <%= submit "Resend confirmation instructions" %>
+<div class="popup-form first-section">
+  <div class="headings">
+    <h2><%= gettext "Resend confirmation instructions" %></h2>
   </div>
-</.form>
 
-<p>
-  <%= link(gettext("Register"), to: Routes.user_registration_path(@conn, :new)) %> |
-  <%= link(gettext("Sign in"), to: Routes.user_session_path(@conn, :new)) %>
-</p>
+  <.form let={f} for={:user} action={Routes.user_confirmation_path(@conn, :create)}>
+    <div>
+      <%= label f, :email %>
+      <%= email_input f, :email, required: true %>
+    </div>
+
+    <div>
+      <%= submit(gettext("Resend confirmation instructions"), class: "primary h-[48px]") %>
+    </div>
+  </.form>
+
+  <p class="footnote">
+    <%= link(gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "text-secondary-700") %>&nbsp;&nbsp;|
+    <%= link(gettext("Sign in"), to: Routes.user_session_path(@conn, :new), class: "text-secondary-700") %>
+  </p>
+</div>
+
+
 
 <style>
   .invalid-feedback {

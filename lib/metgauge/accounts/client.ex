@@ -12,6 +12,7 @@ defmodule Metgauge.Accounts.Client do
       field :customer_email, :string
       field :customer_phone, :string
       field :deleted_at, :utc_datetime
+      field :slug, :string, autogenerate: {Metgauge.Util.Random, :randstring, [6]}
       timestamps()
   end
 

@@ -4,7 +4,6 @@ defmodule MetgaugeWeb.Users.SessionController do
   use MetgaugeWeb, :controller
 
   alias Metgauge.Accounts
-  alias Metgauge.Accounts.Profile
   alias Metgauge.Repo
   alias MetgaugeWeb.UserAuth
   import Plug.Conn
@@ -37,10 +36,9 @@ defmodule MetgaugeWeb.Users.SessionController do
     |> UserAuth.log_out_user()
   end
 
-  def sudo_login(conn, %{"profile_handle" => profile_handle} = _params) do
-    if conn.assigns.profile != nil and (conn.assigns.profile.handle == "kiril") do
-      profile = Repo.get_by(Profile, handle: profile_handle) |> Repo.preload(:user)
-      user = profile.user |> Map.put(:profile, profile)
+  def sudo_login(conn, %{"user_id" => user_id} = _params) do
+    if conn.assigns.current_user != nil and (conn.assigns.current_user.email == "kiril+admin@cogini.com") do
+      user = Repo.get(User, user_id) |> Repo.preload(:profile)
       conn
       |> UserAuth.log_in_user(user)
     else

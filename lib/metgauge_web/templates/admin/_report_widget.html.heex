@@ -1,7 +1,9 @@
-<div class="report-item">
-  <h5><%= gettext "New Clients" %></h5>
-  <span class="month_report_new_clients"><%= @report_data.new_clients %></span>
-</div>
+<%= if @conn.assigns.profile.role == "superadmin" do %>
+  <div class="report-item">
+    <h5><%= gettext "New Clients" %></h5>
+    <span class="month_report_new_clients"><%= @report_data.new_clients %></span>
+  </div>
+<% end %>
 <div class="report-item">
   <h5><%= gettext "Total Users" %></h5>
   <span class="month_report_moves"><%= @report_data.total_users %></span>

@@ -7,7 +7,7 @@ defmodule MetgaugeWeb.Users.OauthController do
 
   plug Ueberauth
   @rand_pass_length 32
-  @cookie "_mover_app_affiliate"
+  @cookie "_metgauge_affiliate"
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     auth.info.email
@@ -73,7 +73,8 @@ defmodule MetgaugeWeb.Users.OauthController do
   defp send_confirmation(user, conn) do
     Accounts.deliver_user_confirmation_instructions(conn,
       user,
-      &Routes.user_confirmation_url(conn, :edit, &1)
+      &Routes.user_confirmation_url(conn, :edit, &1),
+      ""
     )
   end
 

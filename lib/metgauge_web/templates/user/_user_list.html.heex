@@ -20,7 +20,7 @@
                 <td data-title={gettext "Client"}><%= if profile.user.client !=nil, do: profile.user.client.name, else: "None" %></td>
                 <td data-title={gettext "Confirmed"}><%= if profile.user.confirmed_at != nil, do: gettext("Yes"), else: gettext("No") %></td>
                 <td data-title={gettext "Status"}><%= if profile.user.deactivated_at != nil, do: gettext("Archived"), else: gettext("Active") %></td>
-                <td data-title={gettext "Role"}><%= if profile.role == "user", do: gettext("User"), else: gettext("Admin") %></td>
+                <td data-title={gettext "Role"}><%= get_role_string(profile.role) %></td>
                 <td data-title={gettext "Actions"}>
                   <%= if profile.user.deactivated_at == nil do %>
                     <a href={Routes.admin_user_path(@conn, :edit, profile.id)} class="btn tertiary">Edit</a>

@@ -128,14 +128,11 @@ defmodule Metgauge.Accounts do
 
   ## Confirmation
 
-  def deliver_user_confirmation_instructions(conn, %User{} = user, confirmation_url_fun)
-      when is_function(confirmation_url_fun, 1) do
+  def deliver_user_confirmation_instructions(conn, %User{} = user, %User{} = sent_user, status) do
     if user.confirmed_at do
       {:error, :already_confirmed}
     else
-      {encoded_token, user_token} = UserToken.build_email_token(user, "confirm")
-      Repo.insert!(user_token)
-      UserNotifier.deliver_confirmation_instructions(conn, user, confirmation_url_fun.(encoded_token))
+      UserNotifier.deliver_confirmation_instructions(conn, user, sent_user, status)
     end
   end
 

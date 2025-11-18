@@ -22,6 +22,7 @@ defmodule MetgaugeWeb.Router do
 
   pipeline :registration do
     plug :app
+    plug :put_root_layout, {MetgaugeWeb.LayoutView, :landing}
     plug :put_layout_class, "registration"
   end
 
@@ -73,10 +74,11 @@ defmodule MetgaugeWeb.Router do
   end
 
   scope "/admin", MetgaugeWeb do
-    pipe_through [:admin]
+    pipe_through [:admin, :require_authenticated_user]
     get "/", AdminController, :index
     get "/user_notifications", AdminController, :user_notifications
     get "/user_notifications_lazy", AdminController, :user_notifications_lazy
+    get "/sudo_login/:user_id", Users.SessionController, :sudo_login
   end
 
   scope "/admin", MetgaugeWeb, as: :admin do
@@ -103,6 +105,7 @@ defmodule MetgaugeWeb.Router do
     pipe_through [:registration, :redirect_if_user_is_authenticated]
 
     get "/register", RegistrationController, :new
+    get "/register/:client_slug", RegistrationController, :new
     post "/register", RegistrationController, :create
     get "/sign_in", SessionController, :new
     post "/sign_in", SessionController, :create

@@ -19,6 +19,21 @@
     </div>
   </div>
 
+  <%= if @client_id != nil do %>
+    <input class="min-w-full" id="user_client_id" name="user[client_id]" type="hidden" value={@client_id}>
+  <% else %>
+    <div>
+      <%= label(f, :email, gettext "Client") %>
+      <%= select(f, :client_id, @clients, class: "min-w-full") %>
+      <%= error_tag(f, :client_id) %>
+    </div>
+  <% end %>
+  <div>
+    <%= label(f, :role, gettext "Client") %>
+    <%= select(f, :role, @roles, class: "min-w-full") %>
+    <%= error_tag(f, :role) %>
+    <p style="font-size: small;">If you want to register as client's admin, choose any of one of the roles and contact Metgauge Admin to approve your admin privilages.</p>
+  </div>
   <div class="relative">
     <a href="" class="show-pass">
       <div class="hide-pass-line"></div>

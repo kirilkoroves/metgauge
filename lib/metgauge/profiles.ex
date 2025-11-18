@@ -1,14 +1,11 @@
 defmodule Metgauge.Profiles do
   require Logger
 
-  @summary_keys [:handle, :first_name, :last_name, :roles]
-
   import Ecto.Query, warn: false
 
   alias Metgauge.Repo
 
   alias Metgauge.Accounts.{Profile, User}
-  alias Metgauge.Helpers.AzureHelpers
   import MetgaugeWeb.Gettext
 
   def get_profile_by_handle(handle) when is_binary(handle) do

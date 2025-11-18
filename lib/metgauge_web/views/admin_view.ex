@@ -1,12 +1,11 @@
 defmodule MetgaugeWeb.AdminView do
   use MetgaugeWeb, :view
-  alias Metgauge.Helpers.AzureHelpers
 
   def profile_image_url(conn, profile) do
     if profile == nil or profile.avatar_path == "" or profile.avatar_path == nil do
       Routes.static_path(conn, "/assets/svg/generic/no_profile_photo.svg")
     else
-      AzureHelpers.get_azure_public_file_path(profile.avatar_path)
+      Routes.static_path(conn, "/uploads/#{profile.avatar_path}")
     end
   end
 
@@ -59,21 +58,5 @@ defmodule MetgaugeWeb.AdminView do
 
   def email_datetime(datetime, locale) do
     datetime |> Timex.lformat!("%b %d, %y", locale, :strftime)
-  end
-
-  def move_item_image_url(conn, move_item) do
-    if move_item == nil or move_item.image_url == "" or move_item.image_url == nil do
-      Routes.static_url(conn, "/assets/images/package.png")
-    else
-      AzureHelpers.get_azure_public_file_path(move_item.image_url)
-    end
-  end
-
-  def move_image_url(conn, move) do
-    if move == nil or move.image_url == "" or move.image_url == nil do
-      Routes.static_url(conn, "/assets/images/office.png")
-    else
-      AzureHelpers.get_azure_public_file_path(move.image_url)
-    end
   end
 end

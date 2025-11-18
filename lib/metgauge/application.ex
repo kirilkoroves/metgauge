@@ -22,6 +22,7 @@ defmodule Metgauge.Application do
       {ConCache, [name: :translate_cache, ttl_check_interval: false]},
       # Start a worker by calling: Metgauge.Worker.start_link(arg)
       # {Metgauge.Worker, arg}
+      Metgauge.MQTTClient
     ] ++ cron_jobs()
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -136,14 +136,21 @@ defmodule MetgaugeWeb.UserAuth do
   they use the application at all, here would be a good place.
   """
   def require_authenticated_user(conn, _opts) do
-    if conn.assigns[:current_user] do
-      conn
-    else
-      conn
-      |> put_flash(:error, "You must sign in to access this page.")
-      |> maybe_store_return_to()
-      |> redirect(to: Routes.user_session_path(conn, :new))
-      |> halt()
+    IO.inspect(IO.inspect(conn.assigns[:current_user] != nil and conn.assigns[:current_user].confirmed_at != nil))
+    cond do
+      conn.assigns[:current_user] != nil and conn.assigns[:current_user].confirmed_at != nil -> conn
+      conn.assigns[:current_user] == nil ->
+        conn
+        |> put_flash(:error, "You must sign in to access this page.")
+        |> maybe_store_return_to()
+        |> redirect(to: Routes.user_session_path(conn, :new))
+        |> halt()
+
+      conn.assigns[:current_user].confirmed_at == nil -> 
+        conn
+        |> maybe_store_return_to()
+        |> redirect(to: Routes.user_confirmation_path(conn, :new))
+        |> halt()
     end
   end
 

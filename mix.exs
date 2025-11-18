@@ -52,7 +52,7 @@ defmodule Metgauge.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "== 0.21.0"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"},
+      {:plug_cowboy, "~> 2.4"},
       {:tzdata, "~> 1.1"},
       {:ex_money, "~> 5.12"},
       {:ex_money_sql, "~> 1.7"},
@@ -104,7 +104,11 @@ defmodule Metgauge.MixProject do
       {:porcelain, "~> 2.0"},
       {:recase, "~> 0.4"},
       {:scrivener_ecto, "~> 2.0"},
-      {:ex_heroicons, "~> 2.0.0"}
+      {:ex_heroicons, "~> 2.0.0"},
+      {:cowlib, "~> 2.13.0", override: true},
+      {:gun, git: "https://github.com/emqx/gun", tag: "1.3.4", override: true},
+      {:emqtt, github: "emqx/emqtt", tag: "1.4.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
+      {:contex, github: "mindok/contex"}
     ]
   end
 

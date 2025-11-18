@@ -15,9 +15,9 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
-    <link rel="apple-touch-icon" sizes="180x180" href={Routes.static_path(@conn, "/assets/images/apple-touch-icon.png")}>
-    <link rel="icon" type="image/png" sizes="32x32" href={Routes.static_path(@conn, "/assets/images/icon-32x32.png")}>
-    <link rel="icon" type="image/png" sizes="16x16" href={Routes.static_path(@conn, "/assets/images/icon-16x16.png")}>
+    <link rel="apple-touch-icon" sizes="180x180" href={Routes.static_path(@conn, "/assets/images/logo.png")}>
+    <link rel="icon" type="image/png" sizes="32x32" href={Routes.static_path(@conn, "/assets/images/icon-32x32.ico")}>
+    <link rel="icon" type="image/png" sizes="16x16" href={Routes.static_path(@conn, "/assets/images/icon-16x16.ico")}>
     <link rel="manifest" href={Routes.static_path(@conn, "/assets/images/site.webmanifest")}>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GFQ1V6EY7V"></script>
@@ -53,13 +53,21 @@
   <body class={"admin font-gantari #{@conn.assigns.locale} #{Map.get(assigns, :layout_class, "")}"}>
       <header>
         <div class="logo">
-          <a href={}>
+          <a href="/">
             <img src={Routes.static_path(@conn, "/assets/images/logo.png")} />
           </a>
         </div>
         <hr class="w-3/4 mx-auto" />
         <nav class="admin-menu">
           <ul>
+            <%= if @conn.assigns.profile.role == "superadmin" or @conn.assigns.profile.role == "admin" do %>
+              <li>
+                <a href={Routes.admin_path(@conn, :index)} class={get_endpoint_active_class(@conn, Routes.admin_path(@conn, :index))}>
+                  <%= icon("home", type: "solid", class: "h-5 w-5") %>
+                  <div class="link-name"><%= gettext("Home") %></div>
+                </a>
+              </li>
+            <% end %>
             <%= if @conn.assigns.profile.role == "superadmin" do %>
               <li>
                 <a href={Routes.admin_client_path(@conn, :index)} class={get_endpoint_active_class(@conn, Routes.admin_client_path(@conn, :index))}>
@@ -67,6 +75,8 @@
                   <div class="link-name"><%= gettext("Clients") %></div>
                 </a>
               </li>
+            <% end %>
+            <%= if @conn.assigns.profile.role == "superadmin" or @conn.assigns.profile.role == "admin" do %>
               <li>
                 <a href={Routes.admin_user_path(@conn, :index)} class={get_endpoint_active_class(@conn, Routes.admin_user_path(@conn, :index))}>
                   <%= Heroicons.icon("users", type: "solid", class: "h-5 w-5") %>
@@ -78,6 +88,30 @@
                 <a href={Routes.admin_path(@conn, :index)} class={get_endpoint_active_class(@conn, Routes.admin_path(@conn, :index))}>
                   <%= icon("home", type: "solid", class: "h-5 w-5") %>
                   <div class="link-name"><%= gettext "Dashboard" %></div>
+                </a>
+              </li>
+              <li>
+                <a href="" class={get_endpoint_active_class(@conn, Routes.admin_path(@conn, :user_notifications))}>
+                  <%= icon("identification", type: "solid", class: "h-5 w-5") %>
+                  <div class="link-name"><%= gettext "Details" %></div>
+                </a>
+              </li>
+              <li>
+                <a href="" class={get_endpoint_active_class(@conn, Routes.admin_path(@conn, :user_notifications))}>
+                  <%= icon("shield-check", type: "solid", class: "h-5 w-5") %>
+                  <div class="link-name"><%= gettext "Calibrate" %></div>
+                </a>
+              </li>
+              <li>
+                <a href="" class={get_endpoint_active_class(@conn, Routes.admin_path(@conn, :user_notifications))}>
+                  <%= icon("computer-desktop", type: "solid", class: "h-5 w-5") %>
+                  <div class="link-name"><%= gettext "System Status" %></div>
+                </a>
+              </li>
+              <li>
+                <a href="" class={get_endpoint_active_class(@conn, Routes.admin_path(@conn, :user_notifications))}>
+                  <%= icon("information-circle", type: "solid", class: "h-5 w-5") %>
+                  <div class="link-name"><%= gettext "Help" %></div>
                 </a>
               </li>
             <% end %>
@@ -154,6 +188,16 @@
                               <div class="link-name"><%= gettext("Clients") %></div>
                             </a>
                           </li>
+                        <% end %>
+                        <%= if @conn.assigns.profile.role == "admin" do %>
+                        <li>
+                          <a href={Routes.admin_client_path(@conn, :edit, @conn.assigns.current_user.client_id)}>
+                            <%= icon("building-office-2", type: "outline", class: "h-5 w-5") %>
+                            <%= gettext "Client Info" %>
+                          </a>
+                        </li>
+                        <% end %>
+                        <%= if @conn.assigns.profile.role == "superadmin" or @conn.assigns.profile.role == "admin" do %>
                           <li class="show-mobile-item">
                             <a href={Routes.admin_user_path(@conn, :index)}>
                               <%= Heroicons.icon("users", type: "solid", class: "h-5 w-5") %>

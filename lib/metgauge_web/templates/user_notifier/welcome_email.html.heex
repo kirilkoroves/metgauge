@@ -1,13 +1,14 @@
 <div class="title">
-    <h2><%= gettext("Welcome to Commercial Works!") %></h2>
+    <h2><%= gettext("Welcome to MetGauge!") %></h2>
 </div>
 <div class="main-content text-left">
         <p><%= gettext("Hi %{first_name},", first_name: @profile.first_name) %>
-        <br><%= gettext("We are thrilled to have you join Commercial Works !") %>
+        <br><%= gettext("We are thrilled to have you join MetGauge !") %>
         </p>
         <p><b><%= gettext("Account ID:") %></b> <%= @user.email %></p>
-        <p><%= gettext("Commercial Works is a proud member of OMA (Office Moving Alliance) providing our customers relocation capabilities across North America. If you need commercial relocation, transportation, warehousing, decommission, or project management installation services") %></p>
-        <p><%= gettext("Can't wait to see your service offering on timelyhero and grow with us!  Contact us at <a class=\"mailtolink\" href=\"mailto:support@moverapp.com\">support@moverapp.com</a> if there is any feedback or question. A huge thank you to be part of us!") |> raw() %></p>
-
-        <p><%= gettext("<b>Best,<br>The Commercial Works team</b>") |> raw() %></p>
+        <p><%= gettext("Can't wait to see your service offering on timelyhero and grow with us!  Contact us at <a class=\"mailtolink\" href=\"mailto:support@metgauge.com\">support@metgauge.com</a> if there is any feedback or question. A huge thank you to be part of us!") |> raw() %></p>
+        <p>
+            <a href={MetgaugeWeb.Router.Helpers.user_session_url(MetgaugeWeb.Endpoint, :new)} target="_blank" class="btn primary large"><%= gettext("Sign In") %></a>
+        </p>
+        <p><%= gettext("<b>Best,<br>The MetGauge team</b>") |> raw() %></p>
 </div>
